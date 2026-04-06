@@ -27,7 +27,7 @@ function clickedButton(){
     console.log(score);
 };
 
-setInterval(pointPerSecAdder(), 1000)
+setInterval(pointPerSecAdder, 1000);
 
 function pointPerSecAdder(){
     score = score + pointsPerSec;
@@ -35,8 +35,11 @@ function pointPerSecAdder(){
 }
 
 function devMode(){
+    prompt("Enable dev mode? (enter password first): ");
+    if(prompt = "6769"){
     score = score + 1000000000000;
     scoreDisplay.innerHTML = "Score = " + 1000000000000;
+    }
 }
 
 function upgrade1(){
@@ -69,6 +72,7 @@ function upgrade2(){
         pointsPerSec++;
         score = score - pickaxeUpgCost;
         alert(pointsPerSec);
+        ppsDisplay.innerHTML = "Points Per Second: " + pointsPerSec;
     }else{
         alert("Not enough money!");
     }
