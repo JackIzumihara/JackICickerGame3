@@ -1,10 +1,11 @@
 let score = 0;
 let multi = 0;
 let furnaceUpgAmount = 0;
-let furnaceUpgCost = 50;
+let furnaceUpgCost = 30;
 let pickaxeUpgAmount = 0;
-let pickaxeUpgCost = 250;
-let upgrade3Amount = 0;
+let pickaxeUpgCost = 20;
+let enchantmentAmount = 0;
+let enchantmentCost = 2000;
 let pointsPerSec = 0;
 
 let multiDisplay = document.getElementById('scoreMulti');
@@ -20,6 +21,9 @@ let furnaceAmountDisplay = document.getElementById('upgrade1Amount');
 
 let pickaxeCostDisplay = document.getElementById('upgrade2');
 let pickaxeAmountDisplay = document.getElementById('upgrade2Amount');
+
+let enchantmentCostDisplay = document.getElementById('upgrade3');
+let enchantmentAmountDisplay = document.getElementById('upgrade3Amount');
 
 function clickedButton(){
     score = score + multi + 1;
@@ -56,13 +60,16 @@ function upgrade1(){
         }
         multi = multi + 1;
         furnaceUpgAmount++;
-        if (furnaceUpgCost <=1000){
+        if (furnaceUpgCost <=400){
+            furnaceUpgCost = (furnaceUpgCost * 1.5);
+        }else if(furnaceUpgCost >=400 && furnaceUpgCost <=1000){
             furnaceUpgCost = (furnaceUpgCost * 1.25);
-        }else if(furnaceUpgCost >=1000 && furnaceUpgCost <=5000){
-            furnaceUpgCost = (furnaceUpgCost * 1.1);
-        }else if(furnaceUpgCost >=5000){
-            furnaceUpgCost = (furnaceUpgCost * 1.005 * (furnaceUpgAmount * 0.001));
+        }else if(furnaceUpgCost >=1000 && furnaceUpgCost <=4000){
+            furnaceUpgCost = (furnaceUpgCost * 1.3);
+        }else if(furnaceUpgCost >=4000){
+            furnaceUpgCost = (furnaceUpgCost * 1.5);
         }
+
         furnaceUpgCost = Math.floor(furnaceUpgCost);
         scoreDisplay.innerHTML = "Score = " + score;
         furnaceCostDisplay.innerHTML = "+ 1 per click - $" + furnaceUpgCost;
@@ -87,12 +94,12 @@ function upgrade2(){
         score = score - pickaxeUpgCost;
         }
         pickaxeUpgAmount++;
-        if (pickaxeUpgCost < 2000){
-            pickaxeUpgCost = pickaxeUpgCost * 1.05;
-        } else if (pickaxeUpgCost >= 2000 && pickaxeUpgCost < 10000){
-            pickaxeUpgCost = pickaxeUpgCost * 1.01;
-        } else if (pickaxeUpgCost >= 10000){
-            pickaxeUpgCost = pickaxeUpgCost * 1.0005;
+        if (pickaxeUpgCost <= 200){
+            pickaxeUpgCost = pickaxeUpgCost * 1.5;
+        } else if (pickaxeUpgCost >= 200 && pickaxeUpgCost < 2000){
+            pickaxeUpgCost = pickaxeUpgCost * 1.25;
+        } else if (pickaxeUpgCost >= 2000){
+            pickaxeUpgCost = pickaxeUpgCost * 1.3;
         }
         pickaxeUpgCost = Math.floor(pickaxeUpgCost);
         scoreDisplay.innerHTML = "Score = " + score;
@@ -106,6 +113,39 @@ function upgrade2(){
     }else{
         if(devModeActive == 1){
             console.log("Not enough money for upgrade 2");
+        }
+    }
+}
+
+function upgrade3(){
+    if(score == enchantmentCost || devModeActive == 1){
+        pointsPerSec = pointsPerSec * 1.5;
+        multi = multi * 1.5;
+        if(devModeActive != 1){
+            score = score - enchantmentCost;
+        }
+        enchantmentAmount++;
+        if (enchantmentCost = 2000){
+            enchantmentCost = enchantmentCost * 3;
+        } else if (enchantmentCost = 6000){
+            enchantmentCost = enchantmentCost * 3;
+        } else if (enchantmentCost >= 18000 && enchantmentCost <180000000){
+            enchantmentCost = enchantmentCost * 10;
+        }else if(enchantmentCost >= 180000000){
+            enchantmentCost = enchantmentCost * 100;
+        }
+        scoreDisplay.innerHTML = "Score = " + score;
+        ppsDisplay.innerHTML = "Points Per Second: " + pointsPerSec;
+        enchantmentCostDisplay.innerHTML = "Increases PPS & clicks per second by 1.5x - $" + enchantmentCost;
+        enchantmentAmountDisplay.innerHTML = enchantmentAmount + " Enchantments owned";
+        if(devModeActive == 1){
+        console.log("pps is now: " + pointsPerSec);
+        console.log("points per click is now: " + multi);
+        console.log("enchanting now costs: " + enchantmentCost);
+        }
+    }else{
+        if(devModeActive == 1){
+            console.log("Not enough points or issue in code!");
         }
     }
 }

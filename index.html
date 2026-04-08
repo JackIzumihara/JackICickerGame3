@@ -7,7 +7,7 @@
 <body>
     <div class="title">[placeholder]</div>
     <div class="titleSmall">[placeholder]</div>
-    <p class = "devMode" onclick="devMode()">dev mode (trust me theres gonna be more stuff w/ this later)</p>
+    <p class = "devMode" onclick="devMode()">dev mode</p>
     <p class = "titleSmall" id = "scoreDisplay">Score = 0</p>
     <div class="clickButton">
         <img id="clicker" src="https://minecraft.wiki/images/Dirt_JE2_BE2.png?438ac" alt="clicker button" onclick="clickedButton()">
@@ -18,24 +18,24 @@
     <div class="upgrades">
 
         <div id="upgrades">
-            <p>Smelting</p>
+            <p class="upgradeTitle">Smelting</p>
             <img id="upgradeImg" src="https://minecraft.wiki/images/Lit_Furnace_%28S%29.gif?40e71" alt="upgrade1" onclick="upgrade1()">
-            <p id="upgrade1">+1 per click - $50</p>
+            <p id="upgrade1">+1 per click - $30</p>
             <p id="upgrade1Amount"> 0 Furnace Upgrades owned</p>
         </div>
 
         <div id="upgrades">
-            <p>More Pickaxes</p>
+            <p class="upgradeTitle">More Pickaxes</p>
             <img id="upgradeImg" src="https://minecraft.wiki/images/Wooden_Pickaxe_JE3_BE3.png?fa797" alt="upgrade2" onclick="upgrade2()">
-            <p id="upgrade2">+1 point per second - $250</p>
+            <p id="upgrade2">+1 point per second - $20</p>
             <p id="upgrade2Amount"> 0 Pickaxes owned</p>
         </div>
 
         <div id="upgrades">
-            <p>[upgradename]</p>
-            <img id="upgradeImg" src="" alt="upgrade3">
-            <p id="upgrade3">+20 per upgrade - $1000</p>
-            <p id="upgrade3Amount"> 0 [upgradename] owned</p>
+            <p class="upgradeTitle">Enchanting</p>
+            <img id="upgradeImg" src="https://minecraft.wiki/images/Enchanting_Table.gif?904a7" alt="upgrade3" onclick="upgrade3()">
+            <p id="upgrade3">Increases PPS & clicks per second by 1.5x - $2000</p>
+            <p id="upgrade3Amount"> 0 Enchantments owned</p>
         </div>
 
     </div>
