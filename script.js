@@ -6,6 +6,10 @@ let pickaxeUpgAmount = 0;
 let pickaxeUpgCost = 20;
 let enchantmentAmount = 0;
 let enchantmentCost = 2000;
+let tripwireDuperAmount = 0;
+let tripwireDuperCost = 200;
+let pickaxeUpgDPS = 1;
+let tripwireDuperDPS = 5;
 let pointsPerSec = 0;
 
 let multiDisplay = document.getElementById('scoreMulti');
@@ -25,9 +29,15 @@ let pickaxeAmountDisplay = document.getElementById('upgrade2Amount');
 let enchantmentCostDisplay = document.getElementById('upgrade3');
 let enchantmentAmountDisplay = document.getElementById('upgrade3Amount');
 
+let tripwireDuperCostDisplay = document.getElementById('upgrade4');
+let tripwireDuperAmountDisplay = document.getElementById('upgrade4Amount');
+
+let adv1Div = document.getElementById('advancement1');
+
 function clickedButton(){
     score = score + multi + 1;
     scoreDisplay.innerHTML = "Score = " + score;
+    multi = (furnaceUpgAmount * 1);
     if(devModeActive == 1){
     console.log(score);
     }
@@ -36,8 +46,11 @@ function clickedButton(){
 setInterval(pointPerSecAdder, 1000);
 
 function pointPerSecAdder(){
+    pointsPerSec = (pickaxeUpgAmount * pickaxeUpgDPS) + (tripwireDuperAmount * tripwireDuperDPS);
     score = score + pointsPerSec;
     scoreDisplay.innerHTML = "Score = " + score;
+    ppsDisplay.innerHTML = "Points Per Second: " + pointsPerSec;
+    Math.floor(pointsPerSec);
 }
 
 let devModeActive = 0;
@@ -90,7 +103,6 @@ function upgrade1(){
 
 function upgrade2(){
     if(score >= (pickaxeUpgCost) || devModeActive == 1){
-        pointsPerSec = pointsPerSec + 1;
         if(devModeActive != 1){
         score = score - pickaxeUpgCost;
         }
@@ -103,9 +115,10 @@ function upgrade2(){
             pickaxeUpgCost = (pickaxeUpgCost + 100) * 1.01;
         }
         pickaxeUpgCost = Math.floor(pickaxeUpgCost);
+        pointsPerSec = (pickaxeUpgAmount * pickaxeUpgDPS) + (tripwireDuperAmount * tripwireDuperDPS);
         scoreDisplay.innerHTML = "Score = " + score;
         ppsDisplay.innerHTML = "Points Per Second: " + pointsPerSec;
-        pickaxeCostDisplay.innerHTML = "+1 point per second - $" + pickaxeUpgCost;
+        pickaxeCostDisplay.innerHTML = "+" + pickaxeUpgDPS + " point per second - $" + pickaxeUpgCost;
         pickaxeAmountDisplay.innerHTML = pickaxeUpgAmount + " Pickaxes owned";
         if(devModeActive == 1){
         console.log("pps is now: " + pointsPerSec);
@@ -149,5 +162,47 @@ function upgrade3(){
         if(devModeActive == 1){
             console.log("Not enough points or issue in code!");
         }
+    }
+}
+
+function upgrade4(){
+    if(score >= (tripwireDuperCost) || devModeActive == 1){
+        pointsPerSec = pointsPerSec + 5;
+        if(devModeActive != 1){
+        score = score - tripwireDuperCost;
+        }
+        tripwireDuperAmount++;
+        if (tripwireDuperCost <= 5000){
+            tripwireDuperCost = tripwireDuperCost * 1.4;
+        } else if (tripwireDuperCost >= 5000 && tripwireDuperCost < 20000){
+            tripwireDuperCost = tripwireDuperCost * 1.2;
+        } else if (tripwireDuperCost >= 20000){
+            tripwireDuperCost = (tripwireDuperCost + 100) * 1.01;
+        }
+        tripwireDuperCost = Math.floor(tripwireDuperCost);
+        pointsPerSec = (pickaxeUpgAmount * pickaxeUpgDPS) + (tripwireDuperAmount * tripwireDuperDPS);
+        scoreDisplay.innerHTML = "Score = " + score;
+        ppsDisplay.innerHTML = "Points Per Second: " + pointsPerSec;
+        tripwireDuperCostDisplay.innerHTML = "+5 point per second - $" + tripwireDuperCost;
+        tripwireDuperAmountDisplay.innerHTML = tripwireDuperAmount + " Tripwire Dupers owned";
+        if(devModeActive == 1){
+        console.log("pps is now: " + pointsPerSec);
+        console.log("pickUpg now costs: " + pickaxeUpgCost);
+        }
+    }else{
+        if(devModeActive == 1){
+            console.log("Not enough money for upgrade 4");
+        }
+    }
+}
+
+function adv1(){
+    if(score >= 300 && pickaxeUpgAmount >=3 || devModeActive != 1){
+        pickaxeUpgDPS = 2;
+        score = score - 300;
+        adv1Div.remove();
+    }else if(devModeActive == 1){
+        pickaxeUpgDPS = 2;
+        adv1Div.remove();
     }
 }
