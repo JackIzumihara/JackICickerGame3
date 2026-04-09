@@ -44,7 +44,7 @@ let devModeActive = 0;
 
 function devMode(){
     let inputPasscode = prompt("Enable dev mode? (enter password first): ");
-    if(inputPasscode == "orbital strike cannon"){
+    if(inputPasscode == "orbital strike cannon" || inputPasscode == "osc"){
     inputPasscode = "scrambled";
     alert("dev mode active, all upgrades are free and console displays are active");
     }else{
@@ -80,7 +80,7 @@ function upgrade1(){
         console.log("You now have " + furnaceUpgAmount + " Furnace upgrade(s)");
         console.log("Upgrade 1 now costs " + furnaceUpgCost);
         }
-        multiDisplay.innerHTML = "Points Per Click: " + (multi + 1);
+        multiDisplay.innerHTML = "Extra Points Per Click: " + multi;
     }else{
         if(devModeActive == 1){
         console.log("not enough money or issue in code for upgrade 1");
@@ -128,19 +128,17 @@ function upgrade3(){
             score = score - enchantmentCost;
         }
         enchantmentAmount++;
-        if (enchantmentCost = 2000){
+        if (enchantmentCost >= 2000 && enchantmentCost <=18000){
             enchantmentCost = enchantmentCost * 3;
-        } else if (enchantmentCost = 6000){
-            enchantmentCost = enchantmentCost * 3;
-        } else if (enchantmentCost >= 18000 && enchantmentCost <180000000){
+        } else if (enchantmentCost >= 18000 && enchantmentCost <= 180000000){
             enchantmentCost = enchantmentCost * 10;
         }else if(enchantmentCost >= 180000000){
             enchantmentCost = enchantmentCost * 100;
         }
         scoreDisplay.innerHTML = "Score = " + score;
         ppsDisplay.innerHTML = "Points Per Second: " + pointsPerSec;
-        multiDisplay.innerHTML = "Points Per Click: " + multi;
-        enchantmentCostDisplay.innerHTML = "Increases PPS & clicks per second by 1.5x - $" + enchantmentCost;
+        multiDisplay.innerHTML = "Extra Points Per Click: " + multi;
+        enchantmentCostDisplay.innerHTML = "Increases PPS & PPC by 1.5x - $" + enchantmentCost;
         enchantmentAmountDisplay.innerHTML = enchantmentAmount + " Enchantments owned";
         if(devModeActive == 1){
         console.log("pps is now: " + pointsPerSec);

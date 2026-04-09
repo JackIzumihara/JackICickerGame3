@@ -5,14 +5,14 @@
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
-    <div class="title">[placeholder]</div>
-    <div class="titleSmall">[placeholder]</div>
-    <p class = "devMode" onclick="devMode()">dev mode</p>
-    <p class = "titleSmall" id = "scoreDisplay">Score = 0</p>
+    <div class="title">[placeholder clicker name]</div>
+    <div class="titleSmall">Click the block below to gain points, upgrade to gain them faster. Your goal is to get 1 million [scorename] to get the [bestupgradename]</div>
+    <p class = "devMode" onclick="devMode()">:3</p>
+    <p id ="scoreDisplay">Score = 0</p>
     <div class="clickButton">
         <img id="clicker" src="https://minecraft.wiki/images/Dirt_JE2_BE2.png?438ac" alt="clicker button" onclick="clickedButton()">
-        <p id="scoreMulti">Points Per Click: 1</p>
-        <p id="scorePerSec"> Points Per Second: 0 </p>
+        <p id="scoreMulti">Extra Points Per Click: 0</p>
+        <p id="scorePerSec">Points Per Second: 0 </p>
     </div>
 
     <div class="upgrades">
@@ -34,7 +34,7 @@
         <div id="upgrades">
             <p class="upgradeTitle">Enchanting</p>
             <img id="upgradeImg" src="https://minecraft.wiki/images/Enchanting_Table.gif?904a7" alt="upgrade3" onclick="upgrade3()">
-            <p id="upgrade3">Increases PPS & clicks per second by 1.5x - $2000</p>
+            <p id="upgrade3">Increases PPS & PPC by 1.5x - $2000</p>
             <p id="upgrade3Amount"> 0 Enchantments owned</p>
         </div>
 
