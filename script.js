@@ -49,6 +49,7 @@ function devMode(){
     alert("dev mode active, all upgrades are free and console displays are active");
     }else{
         alert("Wrong passcode");
+        inputPasscode = "hahhaha wrong password";
     }
     devModeActive = 1;
 }
@@ -67,7 +68,7 @@ function upgrade1(){
         }else if(furnaceUpgCost >=1000 && furnaceUpgCost <=4000){
             furnaceUpgCost = (furnaceUpgCost * 1.3);
         }else if(furnaceUpgCost >=4000){
-            furnaceUpgCost = (furnaceUpgCost * 1.5);
+            furnaceUpgCost = (furnaceUpgCost + 200) * 1.01;
         }
 
         furnaceUpgCost = Math.floor(furnaceUpgCost);
@@ -99,7 +100,7 @@ function upgrade2(){
         } else if (pickaxeUpgCost >= 200 && pickaxeUpgCost < 2000){
             pickaxeUpgCost = pickaxeUpgCost * 1.25;
         } else if (pickaxeUpgCost >= 2000){
-            pickaxeUpgCost = pickaxeUpgCost * 1.3;
+            pickaxeUpgCost = (pickaxeUpgCost + 100) * 1.01;
         }
         pickaxeUpgCost = Math.floor(pickaxeUpgCost);
         scoreDisplay.innerHTML = "Score = " + score;
@@ -121,6 +122,8 @@ function upgrade3(){
     if(score == enchantmentCost || devModeActive == 1){
         pointsPerSec = pointsPerSec * 1.5;
         multi = multi * 1.5;
+        multi = Math.floor(multi);
+        pointsPerSec = Math.floor(pointsPerSec);
         if(devModeActive != 1){
             score = score - enchantmentCost;
         }
@@ -136,6 +139,7 @@ function upgrade3(){
         }
         scoreDisplay.innerHTML = "Score = " + score;
         ppsDisplay.innerHTML = "Points Per Second: " + pointsPerSec;
+        multiDisplay.innerHTML = "Points Per Click: " + multi;
         enchantmentCostDisplay.innerHTML = "Increases PPS & clicks per second by 1.5x - $" + enchantmentCost;
         enchantmentAmountDisplay.innerHTML = enchantmentAmount + " Enchantments owned";
         if(devModeActive == 1){
