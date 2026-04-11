@@ -65,7 +65,7 @@
     border-radius: 5px;
 }
 
-#upgradeImg{
+.upgradeImg{
     display: block;
     margin-left: auto;
     margin-right: auto;
@@ -105,9 +105,21 @@
     justify-content: center;
 }
 
-#advancementImg{
+.advancementImg{
     display: block;
     margin-left: auto;
     margin-right: auto;
     width: 50px;
+}
+
+#advancement1{
+    display: none;
+}
+
+#advancement2{
+    display: none;
+}
+
+#advancement3{
+    display: none;
 }
