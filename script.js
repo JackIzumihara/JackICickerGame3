@@ -10,12 +10,13 @@ let axeCost = 100;
 let tripwireDuperAmount = 0;
 let tripwireDuperCost = 200;
 let pickaxeUpgDPS = 1;
-let tripwireDuperDPS = 10;
+let tripwireDuperDPS = 5;
 let axeDPS = 3;
 let pointsPerSec = 0;
 let adv1Bought = 0;
 let adv2Bought = 0;
 let adv3Bought = 0;
+let adv4Bought = 0;
 
 let multiDisplay = document.getElementById('scoreMulti');
 console.log(multiDisplay);
@@ -40,6 +41,7 @@ let tripwireDuperAmountDisplay = document.getElementById('upgrade4Amount');
 let adv1Div = document.getElementById('advancement1');
 let adv2Div = document.getElementById('advancement2');
 let adv3Div = document.getElementById('advancement3');
+let adv4Div = document.getElementById('advancement4');
 
 function clickedButton(){
     score = score + multi + 1;
@@ -62,10 +64,13 @@ function pointPerSecAdder(){
     Math.floor(pointsPerSec);
 
     if(pickaxeUpgAmount >= 8 && furnaceUpgAmount >= 3 && adv1Bought == 1){
-        adv2Visible()
+        adv2Visible();
     }
     if(furnaceUpgAmount >= 10){
-        adv3Visible()
+        adv3Visible();
+    }
+    if(furnaceUpgAmount >= 10 && pickaxeUpgAmount >= 10){
+        adv4Visible();
     }
 
 }
@@ -227,8 +232,14 @@ function adv2Visible(){
 }
 
 function adv3Visible(){
-    if(furnaceUpgAmount >= 10){
+    if(furnaceUpgAmount >= 10 && adv4Bought == 1){
         adv3Div.style.display = "unset";
+    }
+}
+
+function adv4Visible(){
+    if(furnaceUpgAmount >= 10 && pickaxeUpgAmount >= 10 && adv2Bought == 1){
+        adv4Div.style.display = "unset";
     }
 }
 
@@ -237,7 +248,7 @@ function adv1(){
     if(score >= 300 && pickaxeUpgAmount >=3 || devModeActive != 1){
         pickaxeUpgDPS = 2;
         score = score - 300;
-        adv1Bought++;
+        adv1Bought = 1;
         pickaxeCostDisplay.innerHTML = "+" + pickaxeUpgDPS + " point per second - $" + pickaxeUpgCost;
         document.getElementById('pickUpgImg').src = "https://minecraft.wiki/images/Stone_Pickaxe_JE2_BE2.png?650b0";
         document.getElementById('clicker').src = "https://minecraft.wiki/images/thumb/Stone_JE5_BE3.png/150px-Stone_JE5_BE3.png?5780c";
@@ -247,16 +258,16 @@ function adv1(){
         pickaxeCostDisplay.innerHTML = "+" + pickaxeUpgDPS + " point per second - $" + pickaxeUpgCost;
         document.getElementById('pickUpgImg').src = "https://minecraft.wiki/images/Stone_Pickaxe_JE2_BE2.png?650b0";
         document.getElementById('clicker').src = "https://minecraft.wiki/images/thumb/Stone_JE5_BE3.png/150px-Stone_JE5_BE3.png?5780c";
-        adv1Bought++;
+        adv1Bought = 1;
         adv1Div.remove();
     }
 }
 
 function adv2(){
-    if(score >= 800 && pickaxeUpgAmount >=8 && furnaceUpgAmount >= 3 && adv1Bought == 1 || devModeActive != 1){
+    if(score >= 700 && pickaxeUpgAmount >=8 && furnaceUpgAmount >= 3 && adv1Bought == 1 || devModeActive != 1){
         pickaxeUpgDPS = 4;
-        adv2Bought++;
-        score = score - 800;
+        adv2Bought = 1;
+        score = score - 700;
         pickaxeCostDisplay.innerHTML = "+" + pickaxeUpgDPS + " point per second - $" + pickaxeUpgCost;
         document.getElementById('pickUpgImg').src = "https://minecraft.wiki/images/Copper_Pickaxe_JE1_BE1.png?3b91b";
         document.getElementById('clicker').src = "https://minecraft.wiki/images/thumb/Copper_Ore_JE2_BE2.png/150px-Copper_Ore_JE2_BE2.png?073cd";
@@ -266,15 +277,15 @@ function adv2(){
         pickaxeCostDisplay.innerHTML = "+" + pickaxeUpgDPS + " point per second - $" + pickaxeUpgCost;
         document.getElementById('pickUpgImg').src = "https://minecraft.wiki/images/Copper_Pickaxe_JE1_BE1.png?3b91b";
         document.getElementById('clicker').src = "https://minecraft.wiki/images/thumb/Copper_Ore_JE2_BE2.png/150px-Copper_Ore_JE2_BE2.png?073cd";
-        adv2Bought++;
+        adv2Bought = 1;
         adv2Div.remove();
     }
 }
 
 function adv3(){
-    if(score >= 500 && furnaceUpgAmount >= 10 || devModeActive != 1){
+    if(score >= 500 && furnaceUpgAmount >= 10 && adv4Bought == 1 || devModeActive != 1){
         furnaceUpgPPC = 2;
-        adv3Bought++;
+        adv3Bought = 1;
         score = score - 500;
         furnaceCostDisplay.innerHTML = "+ " + furnaceUpgPPC + " per click - $" + furnaceUpgCost;
         document.getElementById('furnaceUpgImg').src = "https://minecraft.wiki/images/thumb/Lit_Blast_Furnace_%28S%29_JE1.gif/150px-Lit_Blast_Furnace_%28S%29_JE1.gif?dc6a7";
@@ -283,7 +294,26 @@ function adv3(){
         furnaceUpgPPC = 2;
         furnaceCostDisplay.innerHTML = "+ " + furnaceUpgPPC + " per click - $" + furnaceUpgCost;
         document.getElementById('furnaceUpgImg').src = "https://minecraft.wiki/images/thumb/Lit_Blast_Furnace_%28S%29_JE1.gif/150px-Lit_Blast_Furnace_%28S%29_JE1.gif?dc6a7";
-        adv3Bought++;
+        adv3Bought = 1;
         adv3Div.remove();
+    }
+}
+
+function adv4(){
+    if(score >= 1400 && pickaxeUpgAmount >= 10 && furnaceUpgAmount >= 10 && adv2Bought == 1 || devModeActive != 1){
+        pickaxeUpgDPS = 6
+        adv4Bought = 1;
+        score = score - 1400;
+        pickaxeCostDisplay.innerHTML = "+ " + pickaxeUpgDPS + " per click - $" + pickaxeUpgCost;
+        document.getElementById('pickUpgImg').src = "https://minecraft.wiki/images/Iron_Pickaxe_JE3_BE2.png?8a6ea";
+        document.getElementById('clicker').src = "https://minecraft.wiki/images/Iron_Ore_JE6_BE4.png?b1fb3";
+        adv4Div.remove();
+    }else if(devModeActive == 1){
+        pickaxeUpgDPS = 6
+        adv4Bought = 1;
+        pickaxeCostDisplay.innerHTML = "+ " + pickaxeUpgDPS + " per click - $" + pickaxeUpgCost;
+        document.getElementById('pickUpgImg').src = "https://minecraft.wiki/images/Iron_Pickaxe_JE3_BE2.png?8a6ea";
+        document.getElementById('clicker').src = "https://minecraft.wiki/images/Iron_Ore_JE6_BE4.png?b1fb3";
+        adv4Div.remove();
     }
 }
