@@ -120,18 +120,22 @@
     width: 50px;
 }
 
-#advancement1{
+#pickAdv1{
     display: none;
 }
 
-#advancement2{
+#pickAdv2{
     display: none;
 }
 
-#advancement3{
+#furnaceAdv1{
     display: none;
 }
 
-#advancement4{
+#pickAdv3{
+    display: none;
+}
+
+#pickAdv4{
     display: none;
 }
