@@ -8,10 +8,13 @@ let pickaxeUpgCost = 20;
 let axeAmount = 0;
 let axeCost = 100;
 let tripwireDuperAmount = 0;
-let tripwireDuperCost = 200;
+let tripwireDuperCost = 400;
+let villagerAmount = 0;
+let villagerCost = 5000;
 let pickaxeUpgDPS = 1;
-let tripwireDuperDPS = 5;
+let tripwireDuperDPS = 10;
 let axeDPS = 3;
+let villagerDPS = 50;
 let pointsPerSec = 0;
 let pickAdv1Bought = 0;
 let pickAdv2Bought = 0;
@@ -39,6 +42,9 @@ let axeAmountDisplay = document.getElementById('upgrade3Amount');
 let tripwireDuperCostDisplay = document.getElementById('upgrade4');
 let tripwireDuperAmountDisplay = document.getElementById('upgrade4Amount');
 
+let villagerCostDisplay = document.getElementById('upgrade5');
+let villagerAmountDisplay = document.getElementById('upgrade5Amount')
+
 let pickAdv1Div = document.getElementById('pickAdv1');
 let pickAdv2Div = document.getElementById('pickAdv2');
 let furnaceAdv1Div = document.getElementById('furnaceAdv1');
@@ -57,7 +63,7 @@ function clickedButton(){
 setInterval(pointPerSecAdder, 1000);
 
 function pointPerSecAdder(){
-    pointsPerSec = (pickaxeUpgAmount * pickaxeUpgDPS) + (tripwireDuperAmount * tripwireDuperDPS) + (axeAmount * axeDPS);
+    pointsPerSec = (pickaxeUpgAmount * pickaxeUpgDPS) + (tripwireDuperAmount * tripwireDuperDPS) + (axeAmount * axeDPS) + (villagerAmount * villagerDPS);
     score = score + pointsPerSec;
     scoreDisplay.innerHTML = "Score = " + score;
     ppsDisplay.innerHTML = "Points Per Second: " + pointsPerSec;
@@ -220,6 +226,15 @@ function upgrade4(){
     }else{
         if(devModeActive == 1){
             console.log("Not enough money for upgrade 4");
+        }
+    }
+}
+
+function upgrade5(){
+    if(score >= villagerCost || devModeActive == 1){
+        pointsPerSec = pointsPerSec + villagerDPS;
+        if(devModeActive != 1){
+            score = score - villagerCost;
         }
     }
 }
