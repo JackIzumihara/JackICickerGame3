@@ -14,7 +14,7 @@ let villagerCost = 5000;
 let pickaxeUpgDPS = 1;
 let tripwireDuperDPS = 10;
 let axeDPS = 3;
-let villagerDPS = 50;
+let villagerDPS = 25;
 let pointsPerSec = 0;
 let pickAdv1Bought = 0;
 let pickAdv2Bought = 0;
@@ -43,7 +43,7 @@ let tripwireDuperCostDisplay = document.getElementById('upgrade4');
 let tripwireDuperAmountDisplay = document.getElementById('upgrade4Amount');
 
 let villagerCostDisplay = document.getElementById('upgrade5');
-let villagerAmountDisplay = document.getElementById('upgrade5Amount')
+let villagerAmountDisplay = document.getElementById('upgrade5Amount');
 
 let pickAdv1Div = document.getElementById('pickAdv1');
 let pickAdv2Div = document.getElementById('pickAdv2');
@@ -235,6 +235,28 @@ function upgrade5(){
         pointsPerSec = pointsPerSec + villagerDPS;
         if(devModeActive != 1){
             score = score - villagerCost;
+        }
+        villagerAmount++;
+        if(villagerCost <= 30000){
+            villagerCost = villagerCost * 1.5;
+        }else if(villagerCost > 30000 && villagerCost <= 300000){
+            villagerCost = villagerCost * 1.2;
+        }else if(villagerCost > 300000){
+            villagerCost = (villagerCost + 100) * 1.01;
+        }
+        villagerCost = Math.floor(villagerCost);
+        pointsPerSec = (pickaxeUpgAmount * pickaxeUpgDPS) + (tripwireDuperAmount * tripwireDuperDPS) + (axeAmount * axeDPS) + (villagerAmount * villagerDPS);
+        scoreDisplay.innerHTML = "Score = " + score;
+        ppsDisplay.innerHTML = "Points Per Second: " + pointsPerSec;
+        villagerCostDisplay.innerHTML = "+25 points per second - " + villagerCost;
+        villagerAmountDisplay.innerHTML = villagerAmount + " villagers owned";
+        if(devModeActive == 1){
+            console.log("pps is now" + pointsPerSec);
+            console.log("villagers now cost" + villagerCost);
+        }
+    }else{
+        if(devModeActive == 1){
+            console.log("not enough money for upgrade 5");
         }
     }
 }
