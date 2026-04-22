@@ -22,6 +22,8 @@ let pickAdv2Bought = 0;
 let furnaceAdv1Bought = 0;
 let pickAdv3Bought = 0;
 let pickAdv4Bought = 0;
+let freeAutoClickerAdv1Bought = 0;
+let freeAutoClickerAdv2Bought = 0;
 let freeAutoClicker = 0;
 let freeAutoClickerID = 0;
 let freeAutoClickerInterval = 500;
@@ -57,11 +59,13 @@ let furnaceAdv1Div = document.getElementById('furnaceAdv1');
 let pickAdv3Div = document.getElementById('pickAdv3');
 let pickAdv4Div = document.getElementById('pickAdv4');
 let freeAutoClickerAdv1Div = document.getElementById('freeAutoClickerAdv1');
+let freeAutoClickerAdv2Div = document.getElementById('freeAutoClickerAdv2');
+
 let freeAutoClickerToggledDisplay = document.getElementById('freeAutoClickerToggleDisplay');
 
 function clickedButton(){
     score = score + multi + 1;
-    scoreDisplay.innerHTML = "Score = " + score;
+    scoreDisplay.innerHTML = "Blocks = " + score;
     multi = (furnaceUpgAmount * furnaceUpgPPC);
     if(devModeActive == 1){
     console.log(score);
@@ -72,6 +76,17 @@ function clickedButton(){
         totalClicks++;
     }
 };
+
+function devFreeAutoClickerSpeedChanger(){
+    if(devModeActive == 1){
+        let AutoClickerSpeed = prompt("What do you want to set the autoclicker interval to?")
+        if(AutoClickerSpeed = ""){
+            alert("Action Cancelled");
+        }else{
+            freeAutoClickerInterval = AutoClickerSpeed;
+        }
+    }
+}
 
 setInterval(pointPerSecAdder, 1000);
 setInterval(fastUpdater, 1);
@@ -90,9 +105,9 @@ function freeAutoClickerToggle(){
 
 function fastUpdater(){
     pointsPerSec = (pickaxeUpgAmount * pickaxeUpgDPS) + (tripwireDuperAmount * tripwireDuperDPS) + (axeAmount * axeDPS) + (villagerAmount * villagerDPS);
-    scoreDisplay.innerHTML = "Score = " + score;
-    ppsDisplay.innerHTML = "Points Per Second: " + pointsPerSec;
-    multiDisplay.innerHTML = "Points Per Click: " + (multi + furnaceUpgPPC);
+    scoreDisplay.innerHTML = "Blocks = " + score;
+    ppsDisplay.innerHTML = "Blocks Per Second: " + pointsPerSec;
+    multiDisplay.innerHTML = "Blocks Per Click: " + (multi + furnaceUpgPPC);
     multi = (furnaceUpgAmount * furnaceUpgPPC);
     Math.floor(pointsPerSec);
 
@@ -110,6 +125,9 @@ function fastUpdater(){
     }
     if(totalAutoClickerClicks >= 100){
         freeAutoClickerAdv1Visible();
+    }
+    if(totalAutoClickerClicks >= 750 && freeAutoClickerAdv1Bought == 1){
+        freeAutoClickerAdv2Visible();
     }
 }
 
@@ -144,7 +162,7 @@ function devMode(){
         }else if(infMoney == "Disable" || infMoney == "disable"){
             score = 0;
         }
-        let devAutoClicker = prompt("Do you want to enable or disable the autoclicker?");
+        let devAutoClicker = prompt("Do you want to enable or disable the dev autoclicker?");
         if(devAutoClicker == "Enable" || devAutoClicker == "enable"){
             setInterval(clickedButton, 50);
         }else if (devAutoClicker == "Disable" || devAutoClicker == "disable"){
@@ -350,6 +368,12 @@ function freeAutoClickerAdv1Visible(){
     }
 }
 
+function freeAutoClickerAdv2Visible(){
+    if(totalAutoClickerClicks >= 750 && freeAutoClickerAdv1Bought == 1){
+        freeAutoClickerAdv2Div.style.display = "unset";
+    }
+}
+
 function pickAdv1(){
     if(score >= 300 && pickaxeUpgAmount >=3 && freeUpgrades != 1){
         pickaxeUpgDPS = 2;
@@ -444,6 +468,7 @@ function pickAdv4(){
 function freeAutoClickerAdv1(){
     if(score >= 300 || freeUpgrades == 1){
         freeAutoClickerInterval = 450;
+        freeAutoClickerAdv1Bought = 1;
         if(freeUpgrades != 1){
         score = score - 300;
         }
@@ -451,5 +476,20 @@ function freeAutoClickerAdv1(){
         if(devModeActive == 1){
             console.log("Autoclicker interval is now " + freeAutoClickerInterval);
         }
+    }
+}
+
+function freeAutoClickerAdv2(){
+    if(score >= 1000 || freeUpgrades == 1){
+        freeAutoClickerInterval = 405;
+        freeAutoClickerAdv2Bought = 1;
+        if(freeUpgrades != 1){
+            score = score - 1000;
+        }
+        freeAutoClickerAdv2Div.remove();
+        if(devModeActive == 1){
+            console.log("Autoclicker interval is now " + freeAutoClickerInterval);
+        }
+
     }
 }

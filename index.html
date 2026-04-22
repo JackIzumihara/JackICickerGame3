@@ -6,18 +6,18 @@
 </head>
 <body>
     <div class="title">Block Clicker</div>
-    <div class="titleSmall">Click the block below to gain points, upgrade to gain them faster. Your goal is to get 1 million [scorename] to get the [bestupgradename]</div>
+    <div class="titleSmall">Click the block below to gain points, upgrade to gain them faster. Your goal is to get 1 million blocks to get the Beacon upgrade.</div>
     <p class = "devMode" onclick="devMode()">:3</p>
-    <p id ="scoreDisplay">Score = 0</p>
+    <p id ="scoreDisplay">Blocks = 0</p>
     <div class="clickButton">
         <img id="clicker" src="https://minecraft.wiki/images/Dirt_JE2_BE2.png?438ac" alt="clicker button" onclick="clickedButton()">
-        <p id="scoreMulti">Points Per Click: 0</p>
-        <p id="scorePerSec">Points Per Second: 0 </p>
+        <p id="scoreMulti">Blocks Per Click: 0</p>
+        <p id="scorePerSec">Blocks Per Second: 0 </p>
     </div>
     <div class="freeAutoClicker">
         <img id="freeAutoClickerImg" src="https://minecraft.wiki/images/Cursor.gif?7ad46" alt="freeAutoClicker" onclick="freeAutoClickerToggle()">
         <p class="freeAutoClickerText">Click image above to enable autoclicker</p>
-        <p id="freeAutoClickerToggleDisplay" class="freeAutoClickerText">Autoclicker currently disabled</p>
+        <p id="freeAutoClickerToggleDisplay" class="freeAutoClickerText" onclick="devFreeAutoClickerSpeedChanger()">Autoclicker currently disabled</p>
     </div>
 
     <div class="upgrades" style="overflow-y: scroll;">
@@ -96,6 +96,12 @@
             <p class="advancementTitle">Improved Clicking</p>
             <img class="advancementImg" src="https://minecraft.wiki/images/Leftover_JE1.png?8f236" alt="fACA1Img" onclick="freeAutoClickerAdv1()">
             <p id="freeAutoClickerUpg1Cost">Decreases the autoclicker interval by 10% - $300</p>
+        </div>
+
+        <div id="freeAutoClickerAdv2">
+            <p class="advancementTitle">Trigger Finger</p>
+            <img class="advancementImg" src="" alt="FACA2Img" onclick="freeAutoClickerAdv2()">
+            <p id="freeAutoClickerUpg2Cost">Decreases the autoclicker interval by 10% - $1000</p>
         </div>
         
     </div>
