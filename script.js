@@ -1,5 +1,6 @@
 let score = 0;
 let multi = 0;
+let freeUpgrades = 0;
 let furnaceUpgAmount = 0;
 let furnaceUpgCost = 30;
 let furnaceUpgPPC = 1;
@@ -14,13 +15,18 @@ let villagerCost = 5000;
 let pickaxeUpgDPS = 1;
 let tripwireDuperDPS = 10;
 let axeDPS = 3;
-let villagerDPS = 25;
+let villagerDPS = 50;
 let pointsPerSec = 0;
 let pickAdv1Bought = 0;
 let pickAdv2Bought = 0;
 let furnaceAdv1Bought = 0;
 let pickAdv3Bought = 0;
 let pickAdv4Bought = 0;
+let freeAutoClicker = 0;
+let freeAutoClickerID = 0;
+let freeAutoClickerInterval = 500;
+let totalClicks = 0;
+let totalAutoClickerClicks = 0;
 
 let multiDisplay = document.getElementById('scoreMulti');
 console.log(multiDisplay);
@@ -50,6 +56,8 @@ let pickAdv2Div = document.getElementById('pickAdv2');
 let furnaceAdv1Div = document.getElementById('furnaceAdv1');
 let pickAdv3Div = document.getElementById('pickAdv3');
 let pickAdv4Div = document.getElementById('pickAdv4');
+let freeAutoClickerAdv1Div = document.getElementById('freeAutoClickerAdv1');
+let freeAutoClickerToggledDisplay = document.getElementById('freeAutoClickerToggleDisplay');
 
 function clickedButton(){
     score = score + multi + 1;
@@ -58,16 +66,33 @@ function clickedButton(){
     if(devModeActive == 1){
     console.log(score);
     }
+    if(freeAutoClicker == 1){
+        totalAutoClickerClicks++;
+    }else if(freeAutoClicker != 1){
+        totalClicks++;
+    }
 };
 
 setInterval(pointPerSecAdder, 1000);
+setInterval(fastUpdater, 1);
 
-function pointPerSecAdder(){
+function freeAutoClickerToggle(){
+    if(freeAutoClicker == 1){
+        freeAutoClicker = 0;
+        freeAutoClickerToggledDisplay.innerHTML = "Autoclicker currently disabled";
+        clearInterval(freeAutoClickerID);
+    }else if(freeAutoClicker != 1){
+        freeAutoClicker = 1;
+        freeAutoClickerToggledDisplay.innerHTML = "Autoclicker currently enabled";
+        freeAutoClickerID = setInterval(clickedButton, freeAutoClickerInterval);
+    }
+}
+
+function fastUpdater(){
     pointsPerSec = (pickaxeUpgAmount * pickaxeUpgDPS) + (tripwireDuperAmount * tripwireDuperDPS) + (axeAmount * axeDPS) + (villagerAmount * villagerDPS);
-    score = score + pointsPerSec;
     scoreDisplay.innerHTML = "Score = " + score;
     ppsDisplay.innerHTML = "Points Per Second: " + pointsPerSec;
-    multiDisplay.innerHTML = "Extra Points Per Click: " + (multi + furnaceUpgPPC);
+    multiDisplay.innerHTML = "Points Per Click: " + (multi + furnaceUpgPPC);
     multi = (furnaceUpgAmount * furnaceUpgPPC);
     Math.floor(pointsPerSec);
 
@@ -81,28 +106,56 @@ function pointPerSecAdder(){
         pickAdv3Visible();
     }
     if(pickAdv3Bought == 1 && pickaxeUpgAmount >= 25){
-        pickAdv4Visible;
+        pickAdv4Visible();
     }
+    if(totalAutoClickerClicks >= 100){
+        freeAutoClickerAdv1Visible();
+    }
+}
 
+function pointPerSecAdder(){
+    score = score + pointsPerSec;
 }
 
 let devModeActive = 0;
 
 function devMode(){
+    if(devModeActive != 1){
     let inputPasscode = prompt("Enable dev mode? (enter password first): ");
     if(inputPasscode == "orbital strike cannon" || inputPasscode == "osc"){
     inputPasscode = "scrambled";
     alert("dev mode active, all upgrades are free and console displays are active");
+    freeUpgrades = 1;
     }else{
         alert("Wrong passcode");
         inputPasscode = "hahhaha wrong password";
     }
     devModeActive = 1;
+    }else if(devModeActive == 1){
+        let freeEverything = prompt("Do you want to enable or disable free upgrades and advancements?");
+        if(freeEverything == "Enable" || freeEverything == "enable"){
+            freeUpgrades = 1;
+        }else if(freeEverything == "Disable" || freeEverything == "disable"){
+            freeUpgrades = 0;
+        }
+        let infMoney = prompt("Do you want to enable or disable unlimited money?");
+        if(infMoney == "Enable" || infMoney == "enable"){
+            score = Infinity;
+        }else if(infMoney == "Disable" || infMoney == "disable"){
+            score = 0;
+        }
+        let devAutoClicker = prompt("Do you want to enable or disable the autoclicker?");
+        if(devAutoClicker == "Enable" || devAutoClicker == "enable"){
+            setInterval(clickedButton, 50);
+        }else if (devAutoClicker == "Disable" || devAutoClicker == "disable"){
+            setInterval(clickedButton, 0);
+        }
+    }
 }
 
 function upgrade1(){
-    if(score >= (furnaceUpgCost) || devModeActive == 1){
-        if(devModeActive != 1){
+    if(score >= (furnaceUpgCost) || freeUpgrades == 1){
+        if(freeUpgrades != 1){
         score = score - furnaceUpgCost;
         }
         multi = (furnaceUpgAmount * furnaceUpgPPC);
@@ -127,7 +180,7 @@ function upgrade1(){
         console.log("Upgrade 1 now costs " + furnaceUpgCost);
         console.log("Multi is now: " + multi);
         }
-        multiDisplay.innerHTML = "Extra Points Per Click: " + (multi + furnaceUpgPPC);
+        multiDisplay.innerHTML = "Points Per Click: " + (multi + furnaceUpgPPC);
     }else{
         if(devModeActive == 1){
         console.log("not enough money or issue in code for upgrade 1");
@@ -136,8 +189,8 @@ function upgrade1(){
 }
 
 function upgrade2(){
-    if(score >= (pickaxeUpgCost) || devModeActive == 1){
-        if(devModeActive != 1){
+    if(score >= (pickaxeUpgCost) || freeUpgrades == 1){
+        if(freeUpgrades != 1){
         score = score - pickaxeUpgCost;
         }
         pickaxeUpgAmount++;
@@ -169,9 +222,9 @@ function upgrade2(){
 }
 
 function upgrade3(){
-    if(score >= axeCost || devModeActive == 1){
+    if(score >= axeCost || freeUpgrades == 1){
         pointsPerSec = pointsPerSec + axeDPS;
-        if(devModeActive != 1){
+        if(freeUpgrades != 1){
             score = score - axeCost;
         }
         axeAmount++;
@@ -200,9 +253,9 @@ function upgrade3(){
 }
 
 function upgrade4(){
-    if(score >= (tripwireDuperCost) || devModeActive == 1){
+    if(score >= (tripwireDuperCost) || freeUpgrades == 1){
         pointsPerSec = pointsPerSec + tripwireDuperDPS;
-        if(devModeActive != 1){
+        if(freeUpgrades != 1){
         score = score - tripwireDuperCost;
         }
         tripwireDuperAmount++;
@@ -231,9 +284,9 @@ function upgrade4(){
 }
 
 function upgrade5(){
-    if(score >= villagerCost || devModeActive == 1){
+    if(score >= villagerCost || freeUpgrades == 1){
         pointsPerSec = pointsPerSec + villagerDPS;
-        if(devModeActive != 1){
+        if(freeUpgrades != 1){
             score = score - villagerCost;
         }
         villagerAmount++;
@@ -248,7 +301,7 @@ function upgrade5(){
         pointsPerSec = (pickaxeUpgAmount * pickaxeUpgDPS) + (tripwireDuperAmount * tripwireDuperDPS) + (axeAmount * axeDPS) + (villagerAmount * villagerDPS);
         scoreDisplay.innerHTML = "Score = " + score;
         ppsDisplay.innerHTML = "Points Per Second: " + pointsPerSec;
-        villagerCostDisplay.innerHTML = "+25 points per second - " + villagerCost;
+        villagerCostDisplay.innerHTML = "+" + villagerDPS + " points per second - " + villagerCost;
         villagerAmountDisplay.innerHTML = villagerAmount + " villagers owned";
         if(devModeActive == 1){
             console.log("pps is now" + pointsPerSec);
@@ -291,8 +344,14 @@ function pickAdv4Visible(){
     }
 }
 
+function freeAutoClickerAdv1Visible(){
+    if(totalAutoClickerClicks >= 100){
+        freeAutoClickerAdv1Div.style.display = "unset";
+    }
+}
+
 function pickAdv1(){
-    if(score >= 300 && pickaxeUpgAmount >=3 && devModeActive != 1){
+    if(score >= 300 && pickaxeUpgAmount >=3 && freeUpgrades != 1){
         pickaxeUpgDPS = 2;
         score = score - 300;
         pickAdv1Bought = 1;
@@ -300,7 +359,7 @@ function pickAdv1(){
         document.getElementById('pickUpgImg').src = "https://minecraft.wiki/images/Stone_Pickaxe_JE2_BE2.png?650b0";
         document.getElementById('clicker').src = "https://minecraft.wiki/images/thumb/Stone_JE5_BE3.png/150px-Stone_JE5_BE3.png?5780c";
         pickAdv1Div.remove();
-    }else if(devModeActive == 1){
+    }else if(freeUpgrades == 1){
         pickaxeUpgDPS = 2;
         pickaxeCostDisplay.innerHTML = "+" + pickaxeUpgDPS + " point per second - $" + pickaxeUpgCost;
         document.getElementById('pickUpgImg').src = "https://minecraft.wiki/images/Stone_Pickaxe_JE2_BE2.png?650b0";
@@ -311,7 +370,7 @@ function pickAdv1(){
 }
 
 function pickAdv2(){
-    if(score >= 700 && pickaxeUpgAmount >=8 && furnaceUpgAmount >= 3 && pickAdv1Bought == 1 && devModeActive != 1){
+    if(score >= 700 && pickaxeUpgAmount >=8 && furnaceUpgAmount >= 3 && pickAdv1Bought == 1 && freeUpgrades != 1){
         pickaxeUpgDPS = 3;
         pickAdv2Bought = 1;
         score = score - 700;
@@ -319,7 +378,7 @@ function pickAdv2(){
         document.getElementById('pickUpgImg').src = "https://minecraft.wiki/images/Copper_Pickaxe_JE1_BE1.png?3b91b";
         document.getElementById('clicker').src = "https://minecraft.wiki/images/thumb/Copper_Ore_JE2_BE2.png/150px-Copper_Ore_JE2_BE2.png?073cd";
         pickAdv2Div.remove();
-    }else if(devModeActive == 1){
+    }else if(freeUpgrades == 1){
         pickaxeUpgDPS = 3;
         pickaxeCostDisplay.innerHTML = "+" + pickaxeUpgDPS + " point per second - $" + pickaxeUpgCost;
         document.getElementById('pickUpgImg').src = "https://minecraft.wiki/images/Copper_Pickaxe_JE1_BE1.png?3b91b";
@@ -330,14 +389,14 @@ function pickAdv2(){
 }
 
 function furnaceAdv1(){
-    if(score >= 500 && furnaceUpgAmount >= 10 && pickAdv3Bought == 1 && devModeActive != 1){
+    if(score >= 500 && furnaceUpgAmount >= 10 && pickAdv3Bought == 1 && freeUpgrades != 1){
         furnaceUpgPPC = 2;
         furnaceAdv1Bought = 1;
         score = score - 500;
         furnaceCostDisplay.innerHTML = "+ " + furnaceUpgPPC + " per click - $" + furnaceUpgCost;
         document.getElementById('furnaceUpgImg').src = "https://minecraft.wiki/images/thumb/Lit_Blast_Furnace_%28S%29_JE1.gif/150px-Lit_Blast_Furnace_%28S%29_JE1.gif?dc6a7";
         furnaceAdv1Div.remove();
-    }else if(devModeActive == 1){
+    }else if(freeUpgrades == 1){
         furnaceUpgPPC = 2;
         furnaceCostDisplay.innerHTML = "+ " + furnaceUpgPPC + " per click - $" + furnaceUpgCost;
         document.getElementById('furnaceUpgImg').src = "https://minecraft.wiki/images/thumb/Lit_Blast_Furnace_%28S%29_JE1.gif/150px-Lit_Blast_Furnace_%28S%29_JE1.gif?dc6a7";
@@ -347,7 +406,7 @@ function furnaceAdv1(){
 }
 
 function pickAdv3(){
-    if(score >= 1400 && pickaxeUpgAmount >= 10 && furnaceUpgAmount >= 10 && pickAdv2Bought == 1 && devModeActive != 1){
+    if(score >= 1400 && pickaxeUpgAmount >= 10 && furnaceUpgAmount >= 10 && pickAdv2Bought == 1 && freeUpgrades != 1){
         pickaxeUpgDPS = 4;
         pickAdv3Bought = 1;
         score = score - 1400;
@@ -355,7 +414,7 @@ function pickAdv3(){
         document.getElementById('pickUpgImg').src = "https://minecraft.wiki/images/Iron_Pickaxe_JE3_BE2.png?8a6ea";
         document.getElementById('clicker').src = "https://minecraft.wiki/images/Iron_Ore_JE6_BE4.png?b1fb3";
         pickAdv3Div.remove();
-    }else if(devModeActive == 1){
+    }else if(freeUpgrades == 1){
         pickaxeUpgDPS = 4;
         pickAdv3Bought = 1;
         pickaxeCostDisplay.innerHTML = "+ " + pickaxeUpgDPS + " per click - $" + pickaxeUpgCost;
@@ -366,18 +425,31 @@ function pickAdv3(){
 }
 
 function pickAdv4(){
-    if(score >= 1750 && pickaxeUpgAmount >= 25 && pickAdv3Bought == 1 && devModeActive != 1){
+    if(score >= 1750 && pickaxeUpgAmount >= 25 && pickAdv3Bought == 1 && freeUpgrades != 1){
         pickaxeUpgDPS = 5;
         pickAdv4Bought = 1;
         score = score - 1750;
         pickaxeCostDisplay.innerHTML = "+ " + pickaxeUpgDPS + " per click - $" + pickaxeUpgCost;
         document.getElementById('clicker').src = "https://minecraft.wiki/images/Deepslate_Iron_Ore_JE2_BE1.png?f4fb9";
         pickAdv4Div.remove();
-    }else if(devModeActive == 1){
+    }else if(freeUpgrades == 1){
         pickaxeUpgDPS = 5;
         pickAdv4Bought = 1;
         pickaxeCostDisplay.innerHTML = "+ " + pickaxeUpgDPS + " per click - $" + pickaxeUpgCost;
         document.getElementById('clicker').src = "https://minecraft.wiki/images/Deepslate_Iron_Ore_JE2_BE1.png?f4fb9";
         pickAdv4Div.remove();
+    }
+}
+
+function freeAutoClickerAdv1(){
+    if(score >= 300 || freeUpgrades == 1){
+        freeAutoClickerInterval = 450;
+        if(freeUpgrades != 1){
+        score = score - 300;
+        }
+        freeAutoClickerAdv1Div.remove();
+        if(devModeActive == 1){
+            console.log("Autoclicker interval is now " + freeAutoClickerInterval);
+        }
     }
 }

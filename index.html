@@ -5,14 +5,19 @@
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
-    <div class="title">[placeholder clicker name]</div>
+    <div class="title">Block Clicker</div>
     <div class="titleSmall">Click the block below to gain points, upgrade to gain them faster. Your goal is to get 1 million [scorename] to get the [bestupgradename]</div>
     <p class = "devMode" onclick="devMode()">:3</p>
     <p id ="scoreDisplay">Score = 0</p>
     <div class="clickButton">
         <img id="clicker" src="https://minecraft.wiki/images/Dirt_JE2_BE2.png?438ac" alt="clicker button" onclick="clickedButton()">
-        <p id="scoreMulti">Extra Points Per Click: 0</p>
+        <p id="scoreMulti">Points Per Click: 0</p>
         <p id="scorePerSec">Points Per Second: 0 </p>
+    </div>
+    <div class="freeAutoClicker">
+        <img id="freeAutoClickerImg" src="https://minecraft.wiki/images/Cursor.gif?7ad46" alt="freeAutoClicker" onclick="freeAutoClickerToggle()">
+        <p class="freeAutoClickerText">Click image above to enable autoclicker</p>
+        <p id="freeAutoClickerToggleDisplay" class="freeAutoClickerText">Autoclicker currently disabled</p>
     </div>
 
     <div class="upgrades" style="overflow-y: scroll;">
@@ -47,8 +52,8 @@
 
         <div class="upgrade">
             <p class="upgradeTitle">Villagers</p>
-            <img class="upgradeImg" src="" alt="upgrade5" onclick="upgrade5()">
-            <p id="upgrade5">+25 points per second - $5000</p>
+            <img class="upgradeImg" src="https://minecraft.wiki/images/thumb/Plains_Villager_Base_JE2.png/300px-Plains_Villager_Base_JE2.png?a2fcc" alt="upgrade5" onclick="upgrade5()">
+            <p id="upgrade5">+50 points per second - $5000</p>
             <p id="upgrade5Amount">0 Villagers Owned</p>
         </div>
 
@@ -87,7 +92,11 @@
             <p id="pickUpg4Cost">Increases Pickaxe PPS (4 > 5) - $1750</p>
         </div>
 
-
+        <div id="freeAutoClickerAdv1">
+            <p class="advancementTitle">Improved Clicking</p>
+            <img class="advancementImg" src="https://minecraft.wiki/images/Leftover_JE1.png?8f236" alt="fACA1Img" onclick="freeAutoClickerAdv1()">
+            <p id="freeAutoClickerUpg1Cost">Decreases the autoclicker interval by 10% - $300</p>
+        </div>
         
     </div>
     <script src="script.js"></script>
