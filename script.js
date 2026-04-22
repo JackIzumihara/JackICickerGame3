@@ -24,9 +24,10 @@ let pickAdv3Bought = 0;
 let pickAdv4Bought = 0;
 let freeAutoClickerAdv1Bought = 0;
 let freeAutoClickerAdv2Bought = 0;
+let freeAutoClickerAdv3Bought = 0;
 let freeAutoClicker = 0;
 let freeAutoClickerID = 0;
-let freeAutoClickerInterval = 500;
+var freeAutoClickerInterval = 500;
 let totalClicks = 0;
 let totalAutoClickerClicks = 0;
 
@@ -60,8 +61,10 @@ let pickAdv3Div = document.getElementById('pickAdv3');
 let pickAdv4Div = document.getElementById('pickAdv4');
 let freeAutoClickerAdv1Div = document.getElementById('freeAutoClickerAdv1');
 let freeAutoClickerAdv2Div = document.getElementById('freeAutoClickerAdv2');
+let freeAutoClickerAdv3Div = document.getElementById('freeAutoClickerAdv3');
 
 let freeAutoClickerToggledDisplay = document.getElementById('freeAutoClickerToggleDisplay');
+let freeAutoClickerIntervalDisplay = document.getElementById('freeAutoclickerIntervalDisplay');
 
 function clickedButton(){
     score = score + multi + 1;
@@ -79,17 +82,19 @@ function clickedButton(){
 
 function devFreeAutoClickerSpeedChanger(){
     if(devModeActive == 1){
-        let AutoClickerSpeed = prompt("What do you want to set the autoclicker interval to?")
+        let AutoClickerSpeed = prompt("What do you want to set the autoclicker interval to?");
+        let ACSStore = AutoClickerSpeed;
         if(AutoClickerSpeed = ""){
             alert("Action Cancelled");
         }else{
-            freeAutoClickerInterval = AutoClickerSpeed;
+            freeAutoClickerInterval = ACSStore;
+            freeAutoClickerIntervalDisplay.innerHTML = "Autoclicker interval is now: " + freeAutoClickerInterval;
         }
     }
 }
 
 setInterval(pointPerSecAdder, 1000);
-setInterval(fastUpdater, 1);
+let fastUpdaterID = setInterval(fastUpdater, 1);
 
 function freeAutoClickerToggle(){
     if(freeAutoClicker == 1){
@@ -108,6 +113,7 @@ function fastUpdater(){
     scoreDisplay.innerHTML = "Blocks = " + score;
     ppsDisplay.innerHTML = "Blocks Per Second: " + pointsPerSec;
     multiDisplay.innerHTML = "Blocks Per Click: " + (multi + furnaceUpgPPC);
+    freeAutoClickerIntervalDisplay.innerHTML = "Current Autoclicker Interval: " + freeAutoClickerInterval;
     multi = (furnaceUpgAmount * furnaceUpgPPC);
     Math.floor(pointsPerSec);
 
@@ -128,6 +134,9 @@ function fastUpdater(){
     }
     if(totalAutoClickerClicks >= 750 && freeAutoClickerAdv1Bought == 1){
         freeAutoClickerAdv2Visible();
+    }
+    if(totalAutoClickerClicks >= 2500 && freeAutoClickerAdv2Bought == 1){
+        freeAutoClickerAdv3Visible();
     }
 }
 
@@ -189,7 +198,7 @@ function upgrade1(){
         }
 
         furnaceUpgCost = Math.floor(furnaceUpgCost);
-        scoreDisplay.innerHTML = "Score = " + score;
+        scoreDisplay.innerHTML = "Blocks = " + score;
         furnaceCostDisplay.innerHTML = "+ " + furnaceUpgPPC + " per click - $" + furnaceUpgCost;
         furnaceAmountDisplay.innerHTML = furnaceUpgAmount + " Furnace upgrade(s) owned";
         if(devModeActive == 1){
@@ -198,7 +207,7 @@ function upgrade1(){
         console.log("Upgrade 1 now costs " + furnaceUpgCost);
         console.log("Multi is now: " + multi);
         }
-        multiDisplay.innerHTML = "Points Per Click: " + (multi + furnaceUpgPPC);
+        multiDisplay.innerHTML = "Blocks Per Click: " + (multi + furnaceUpgPPC);
     }else{
         if(devModeActive == 1){
         console.log("not enough money or issue in code for upgrade 1");
@@ -224,9 +233,9 @@ function upgrade2(){
         }
         pickaxeUpgCost = Math.floor(pickaxeUpgCost);
         pointsPerSec = (pickaxeUpgAmount * pickaxeUpgDPS) + (tripwireDuperAmount * tripwireDuperDPS) + (axeAmount * axeDPS);
-        scoreDisplay.innerHTML = "Score = " + score;
-        ppsDisplay.innerHTML = "Points Per Second: " + pointsPerSec;
-        pickaxeCostDisplay.innerHTML = "+" + pickaxeUpgDPS + " point per second - $" + pickaxeUpgCost;
+        scoreDisplay.innerHTML = "Blocks = " + score;
+        ppsDisplay.innerHTML = "Blocks Per Second: " + pointsPerSec;
+        pickaxeCostDisplay.innerHTML = "+" + pickaxeUpgDPS + " block(s) per second - $" + pickaxeUpgCost;
         pickaxeAmountDisplay.innerHTML = pickaxeUpgAmount + " Pickaxes owned";
         if(devModeActive == 1){
         console.log("pps is now: " + pointsPerSec);
@@ -255,9 +264,9 @@ function upgrade3(){
         }
         axeCost = Math.floor(axeCost);
         pointsPerSec = (pickaxeUpgAmount * pickaxeUpgDPS) + (tripwireDuperAmount * tripwireDuperDPS) + (axeAmount * axeDPS);
-        scoreDisplay.innerHTML = "Score = " + score;
-        ppsDisplay.innerHTML = "Points Per Second: " + pointsPerSec;
-        axeCostDisplay.innerHTML = "+ " + axeDPS + " points per second - $" + axeCost;
+        scoreDisplay.innerHTML = "Blocks = " + score;
+        ppsDisplay.innerHTML = "Blocks Per Second: " + pointsPerSec;
+        axeCostDisplay.innerHTML = "+ " + axeDPS + " blocks per second - $" + axeCost;
         axeAmountDisplay.innerHTML = axeAmount + " Axes owned";
         if(devModeActive == 1){
             console.log("pps is now " + pointsPerSec);
@@ -286,9 +295,9 @@ function upgrade4(){
         }
         tripwireDuperCost = Math.floor(tripwireDuperCost);
         pointsPerSec = (pickaxeUpgAmount * pickaxeUpgDPS) + (tripwireDuperAmount * tripwireDuperDPS) + (axeAmount * axeDPS);
-        scoreDisplay.innerHTML = "Score = " + score;
-        ppsDisplay.innerHTML = "Points Per Second: " + pointsPerSec;
-        tripwireDuperCostDisplay.innerHTML = "+5 point per second - $" + tripwireDuperCost;
+        scoreDisplay.innerHTML = "Blocks = " + score;
+        ppsDisplay.innerHTML = "Blocks Per Second: " + pointsPerSec;
+        tripwireDuperCostDisplay.innerHTML = "+" + tripwireDuperDPS + " blocks per second - $" + tripwireDuperCost;
         tripwireDuperAmountDisplay.innerHTML = tripwireDuperAmount + " Tripwire Dupers owned";
         if(devModeActive == 1){
         console.log("pps is now: " + pointsPerSec);
@@ -317,9 +326,9 @@ function upgrade5(){
         }
         villagerCost = Math.floor(villagerCost);
         pointsPerSec = (pickaxeUpgAmount * pickaxeUpgDPS) + (tripwireDuperAmount * tripwireDuperDPS) + (axeAmount * axeDPS) + (villagerAmount * villagerDPS);
-        scoreDisplay.innerHTML = "Score = " + score;
-        ppsDisplay.innerHTML = "Points Per Second: " + pointsPerSec;
-        villagerCostDisplay.innerHTML = "+" + villagerDPS + " points per second - " + villagerCost;
+        scoreDisplay.innerHTML = "Blocks = " + score;
+        ppsDisplay.innerHTML = "Blocks Per Second: " + pointsPerSec;
+        villagerCostDisplay.innerHTML = "+" + villagerDPS + " blocks per second - " + villagerCost;
         villagerAmountDisplay.innerHTML = villagerAmount + " villagers owned";
         if(devModeActive == 1){
             console.log("pps is now" + pointsPerSec);
@@ -374,18 +383,24 @@ function freeAutoClickerAdv2Visible(){
     }
 }
 
+function freeAutoClickerAdv3Visible(){
+    if(totalAutoClickerClicks >= 1500 && freeAutoClickerAdv2Bought == 1){
+        freeAutoClickerAdv3Div.style.display = "unset";
+    }
+}
+
 function pickAdv1(){
     if(score >= 300 && pickaxeUpgAmount >=3 && freeUpgrades != 1){
         pickaxeUpgDPS = 2;
         score = score - 300;
         pickAdv1Bought = 1;
-        pickaxeCostDisplay.innerHTML = "+" + pickaxeUpgDPS + " point per second - $" + pickaxeUpgCost;
+        pickaxeCostDisplay.innerHTML = "+" + pickaxeUpgDPS + " blocks per second - $" + pickaxeUpgCost;
         document.getElementById('pickUpgImg').src = "https://minecraft.wiki/images/Stone_Pickaxe_JE2_BE2.png?650b0";
         document.getElementById('clicker').src = "https://minecraft.wiki/images/thumb/Stone_JE5_BE3.png/150px-Stone_JE5_BE3.png?5780c";
         pickAdv1Div.remove();
     }else if(freeUpgrades == 1){
         pickaxeUpgDPS = 2;
-        pickaxeCostDisplay.innerHTML = "+" + pickaxeUpgDPS + " point per second - $" + pickaxeUpgCost;
+        pickaxeCostDisplay.innerHTML = "+" + pickaxeUpgDPS + " blocks per second - $" + pickaxeUpgCost;
         document.getElementById('pickUpgImg').src = "https://minecraft.wiki/images/Stone_Pickaxe_JE2_BE2.png?650b0";
         document.getElementById('clicker').src = "https://minecraft.wiki/images/thumb/Stone_JE5_BE3.png/150px-Stone_JE5_BE3.png?5780c";
         pickAdv1Bought = 1;
@@ -398,13 +413,13 @@ function pickAdv2(){
         pickaxeUpgDPS = 3;
         pickAdv2Bought = 1;
         score = score - 700;
-        pickaxeCostDisplay.innerHTML = "+" + pickaxeUpgDPS + " point per second - $" + pickaxeUpgCost;
+        pickaxeCostDisplay.innerHTML = "+" + pickaxeUpgDPS + " blocks per second - $" + pickaxeUpgCost;
         document.getElementById('pickUpgImg').src = "https://minecraft.wiki/images/Copper_Pickaxe_JE1_BE1.png?3b91b";
         document.getElementById('clicker').src = "https://minecraft.wiki/images/thumb/Copper_Ore_JE2_BE2.png/150px-Copper_Ore_JE2_BE2.png?073cd";
         pickAdv2Div.remove();
     }else if(freeUpgrades == 1){
         pickaxeUpgDPS = 3;
-        pickaxeCostDisplay.innerHTML = "+" + pickaxeUpgDPS + " point per second - $" + pickaxeUpgCost;
+        pickaxeCostDisplay.innerHTML = "+" + pickaxeUpgDPS + " blocks per second - $" + pickaxeUpgCost;
         document.getElementById('pickUpgImg').src = "https://minecraft.wiki/images/Copper_Pickaxe_JE1_BE1.png?3b91b";
         document.getElementById('clicker').src = "https://minecraft.wiki/images/thumb/Copper_Ore_JE2_BE2.png/150px-Copper_Ore_JE2_BE2.png?073cd";
         pickAdv2Bought = 1;
@@ -417,12 +432,12 @@ function furnaceAdv1(){
         furnaceUpgPPC = 2;
         furnaceAdv1Bought = 1;
         score = score - 500;
-        furnaceCostDisplay.innerHTML = "+ " + furnaceUpgPPC + " per click - $" + furnaceUpgCost;
+        furnaceCostDisplay.innerHTML = "+ " + furnaceUpgPPC + " blocks per click - $" + furnaceUpgCost;
         document.getElementById('furnaceUpgImg').src = "https://minecraft.wiki/images/thumb/Lit_Blast_Furnace_%28S%29_JE1.gif/150px-Lit_Blast_Furnace_%28S%29_JE1.gif?dc6a7";
         furnaceAdv1Div.remove();
     }else if(freeUpgrades == 1){
         furnaceUpgPPC = 2;
-        furnaceCostDisplay.innerHTML = "+ " + furnaceUpgPPC + " per click - $" + furnaceUpgCost;
+        furnaceCostDisplay.innerHTML = "+ " + furnaceUpgPPC + " blocks per click - $" + furnaceUpgCost;
         document.getElementById('furnaceUpgImg').src = "https://minecraft.wiki/images/thumb/Lit_Blast_Furnace_%28S%29_JE1.gif/150px-Lit_Blast_Furnace_%28S%29_JE1.gif?dc6a7";
         furnaceAdv1Bought = 1;
         furnaceAdv1Div.remove();
@@ -434,14 +449,14 @@ function pickAdv3(){
         pickaxeUpgDPS = 4;
         pickAdv3Bought = 1;
         score = score - 1400;
-        pickaxeCostDisplay.innerHTML = "+ " + pickaxeUpgDPS + " per click - $" + pickaxeUpgCost;
+        pickaxeCostDisplay.innerHTML = "+ " + pickaxeUpgDPS + " blocks per click - $" + pickaxeUpgCost;
         document.getElementById('pickUpgImg').src = "https://minecraft.wiki/images/Iron_Pickaxe_JE3_BE2.png?8a6ea";
         document.getElementById('clicker').src = "https://minecraft.wiki/images/Iron_Ore_JE6_BE4.png?b1fb3";
         pickAdv3Div.remove();
     }else if(freeUpgrades == 1){
         pickaxeUpgDPS = 4;
         pickAdv3Bought = 1;
-        pickaxeCostDisplay.innerHTML = "+ " + pickaxeUpgDPS + " per click - $" + pickaxeUpgCost;
+        pickaxeCostDisplay.innerHTML = "+ " + pickaxeUpgDPS + " blocks per click - $" + pickaxeUpgCost;
         document.getElementById('pickUpgImg').src = "https://minecraft.wiki/images/Iron_Pickaxe_JE3_BE2.png?8a6ea";
         document.getElementById('clicker').src = "https://minecraft.wiki/images/Iron_Ore_JE6_BE4.png?b1fb3";
         pickAdv3Div.remove();
@@ -453,13 +468,13 @@ function pickAdv4(){
         pickaxeUpgDPS = 5;
         pickAdv4Bought = 1;
         score = score - 1750;
-        pickaxeCostDisplay.innerHTML = "+ " + pickaxeUpgDPS + " per click - $" + pickaxeUpgCost;
+        pickaxeCostDisplay.innerHTML = "+ " + pickaxeUpgDPS + " blocks per click - $" + pickaxeUpgCost;
         document.getElementById('clicker').src = "https://minecraft.wiki/images/Deepslate_Iron_Ore_JE2_BE1.png?f4fb9";
         pickAdv4Div.remove();
     }else if(freeUpgrades == 1){
         pickaxeUpgDPS = 5;
         pickAdv4Bought = 1;
-        pickaxeCostDisplay.innerHTML = "+ " + pickaxeUpgDPS + " per click - $" + pickaxeUpgCost;
+        pickaxeCostDisplay.innerHTML = "+ " + pickaxeUpgDPS + " blocks per click - $" + pickaxeUpgCost;
         document.getElementById('clicker').src = "https://minecraft.wiki/images/Deepslate_Iron_Ore_JE2_BE1.png?f4fb9";
         pickAdv4Div.remove();
     }
@@ -491,5 +506,19 @@ function freeAutoClickerAdv2(){
             console.log("Autoclicker interval is now " + freeAutoClickerInterval);
         }
 
+    }
+}
+
+function freeAutoClickerAdv3(){
+    if(score >= 2500 || freeUpgrades == 1){
+        freeAutoClickerInterval = 382;
+        freeAutoClickerAdv3Bought = 1;
+        if(freeUpgrades != 1){
+            score = score - 2500
+        }
+        freeAutoClickerAdv3Div.remove();
+        if(devModeActive == 1){
+            console.log("Autoclicker interval is now " + freeAutoClickerInterval);
+        }
     }
 }
