@@ -26,36 +26,72 @@
         <div class="upgrade">
             <p class="upgradeTitle">Smelting</p>
             <img id="furnaceUpgImg" class="upgradeImg" src="https://minecraft.wiki/images/Lit_Furnace_%28S%29.gif?40e71" alt="upgrade1" onclick="upgrade1()">
-            <p id="upgrade1">+1 per click - $30</p>
+            <p id="upgrade1">+1 Block per click - $30</p>
             <p id="upgrade1Amount"> 0 Furnace Upgrades owned</p>
         </div>
 
         <div class="upgrade">
             <p class="upgradeTitle">More Pickaxes</p>
             <img id="pickUpgImg" class="upgradeImg" src="https://minecraft.wiki/images/Wooden_Pickaxe_JE3_BE3.png?fa797" alt="upgrade2" onclick="upgrade2()">
-            <p id="upgrade2">+1 point per second - $20</p>
+            <p id="upgrade2">+1 Blocks per second - $20</p>
             <p id="upgrade2Amount"> 0 Pickaxes owned</p>
         </div>
 
         <div class="upgrade">
             <p class="upgradeTitle">Tree Chopping</p>
             <img class="upgradeImg" src="https://minecraft.wiki/images/Wooden_Axe_JE2_BE2.png?ff0b9" alt="upgrade3" onclick="upgrade3()">
-            <p id="upgrade3">+3 points per second - $100</p>
+            <p id="upgrade3">+3 Blocks per second - $100</p>
             <p id="upgrade3Amount">0 Axes owned</p>
         </div>
 
         <div class="upgrade">
             <p class="upgradeTitle">Tripwire duper</p>
             <img class="upgradeImg" src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRBP5LxuzvwV5zNJ5VIHvQSnG9VdOE6UtuGVC-yzajUg5a9XudnpK4Rfknv0A&s" alt="upgrade4" onclick="upgrade4()">
-            <p id="upgrade4">+10 points per second - $400</p>
+            <p id="upgrade4">+10 Blocks per second - $400</p>
             <p id="upgrade4Amount">0 Tripwire Dupers owned</p>
         </div>
 
         <div class="upgrade">
             <p class="upgradeTitle">Villagers</p>
             <img class="upgradeImg" src="https://minecraft.wiki/images/thumb/Plains_Villager_Base_JE2.png/300px-Plains_Villager_Base_JE2.png?a2fcc" alt="upgrade5" onclick="upgrade5()">
-            <p id="upgrade5">+50 points per second - $5000</p>
+            <p id="upgrade5">+50 Blocks per second - $5000</p>
             <p id="upgrade5Amount">0 Villagers Owned</p>
+        </div>
+
+        <div id="ironFarmDiv">
+        <div class="upgrade">
+            <p class="upgradeTitle">Iron Farm - Requires 7 villagers</p>
+            <img class="upgradeImg" src="" alt="upgrade6" onclick="upgrade6()">
+            <p id="upgrade6">+500 Blocks per second - $50k</p>
+            <p id="upgrade6Amount">0 Iron Farm Modules Owned (Max 20)</p>
+        </div>
+        </div>
+
+        <div id="goldFarmDiv">
+        <div class="upgrade">
+            <p class="upgradeTitle">Gold Farm Layer</p>
+            <img class="upgradeImg" src="" alt="upgrade7" onclick="upgrade7()">
+            <p id="upgrade7">+2500 Blocks per second - $100k</p>
+            <p id="upgrade7Amount">0 Gold farm layers owned (Max 10)</p>
+        </div>
+        </div>
+
+        <div id="witherSkeletonFarmDiv">
+        <div class="upgrade">
+            <p class="upgradeTitle">Wither Skeleton Farm</p>
+            <img class="upgradeImg" src="" alt="upgrade8" onclick="upgrade8()">
+            <p id="upgrade8">+10k Blocks per second - $250k</p>
+            <p id="upgrade8Amount">0 Wither Skeleton Farms owned</p>
+        </div>
+        </div>
+
+        <div id="beaconDiv">
+        <div class="upgrade">
+            <p class="upgradeTitle">Beacons - requires 1 iron farm, 1 wither skeleton farm, and the enchanting advancement</p>
+            <img class="upgradeImg" src="" alt="beaconImg" onclick="upgrade9()">
+            <p id="upgrade9">+50k Blocks per second - $1M</p>
+            <p id="upgrade9Amount">0 Beacons owned</p>
+        </div>
         </div>
 
     </div>
@@ -66,31 +102,31 @@
         <div id="pickAdv1">
             <p class="advancementTitle">Getting an upgrade</p>
             <img class="advancementImg" src="https://minecraft.wiki/images/Cobblestone_JE5_BE3.png?25024" alt="pick upgrade 1" onclick="pickAdv1()">
-            <p id="pickUpg1Cost">Increase Pickaxe PPS (1 > 2) - $300</p>
+            <p id="pickUpg1Cost">Increase Pickaxe BPS (1 > 2) - $300</p>
         </div>
 
         <div id="pickAdv2">
             <p class="advancementTitle">Copper Age</p>
             <img class="advancementImg" src="https://minecraft.wiki/images/Copper_Ingot_JE2_BE1.png?0d410" alt="pick upgrade 2" onclick="pickAdv2()">
-            <p id="pickUpg2Cost">Increase Pickaxe PPS (2 > 3) - $700</p>
+            <p id="pickUpg2Cost">Increase Pickaxe BPS (2 > 3) - $700</p>
         </div>
 
         <div id="furnaceAdv1">
             <p class="advancementTitle">Blasting</p>
             <img class="advancementImg" src="https://minecraft.wiki/images/thumb/Blast_Furnace_%28S%29_JE1.png/150px-Blast_Furnace_%28S%29_JE1.png?f1920" alt="furnace upgrade 1" onclick="furnaceAdv1()">
-            <p id="furnace3Cost">Increase Furnace PPC (1 > 2) - $500</p>
+            <p id="furnace3Cost">Increase Furnace BPC (1 > 2) - $500</p>
         </div>
 
         <div id="pickAdv3">
             <p class="advancementTitle">Aqquire Hardware</p>
             <img class="advancementImg" src="https://minecraft.wiki/images/Iron_Ingot_JE3_BE2.png?849cb" alt="pick upgrade 3" onclick="pickAdv3()">
-            <p id="pickUpg3Cost">Increase Pickaxe PPS (3 > 4) - $1400</p>
+            <p id="pickUpg3Cost">Increase Pickaxe BPS (3 > 4) - $1400</p>
         </div>
 
         <div id="pickAdv4">
             <p class="advancementTitle">Digging Deeper</p>
             <img class="advancementImg" src="https://minecraft.wiki/images/Deepslate_speleothems.png?67c1d" alt="pick upgrade 4" onclick="pickAdv4()">
-            <p id="pickUpg4Cost">Increases Pickaxe PPS (4 > 5) - $1750</p>
+            <p id="pickUpg4Cost">Increases Pickaxe BPS (4 > 5) - $1750</p>
         </div>
 
         <div id="freeAutoClickerAdv1">

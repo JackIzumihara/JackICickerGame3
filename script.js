@@ -155,7 +155,7 @@ function devMode(){
     freeUpgrades = 1;
     }else{
         alert("Wrong passcode");
-        inputPasscode = "hahhaha wrong password";
+        inputPasscode = "L wrong password";
     }
     devModeActive = 1;
     }else if(devModeActive == 1){
@@ -199,7 +199,7 @@ function upgrade1(){
 
         furnaceUpgCost = Math.floor(furnaceUpgCost);
         scoreDisplay.innerHTML = "Blocks = " + score;
-        furnaceCostDisplay.innerHTML = "+ " + furnaceUpgPPC + " per click - $" + furnaceUpgCost;
+        furnaceCostDisplay.innerHTML = "+ " + furnaceUpgPPC + " Block(s) per click - $" + furnaceUpgCost;
         furnaceAmountDisplay.innerHTML = furnaceUpgAmount + " Furnace upgrade(s) owned";
         if(devModeActive == 1){
         console.log("Score is now " + score);
@@ -235,7 +235,7 @@ function upgrade2(){
         pointsPerSec = (pickaxeUpgAmount * pickaxeUpgDPS) + (tripwireDuperAmount * tripwireDuperDPS) + (axeAmount * axeDPS);
         scoreDisplay.innerHTML = "Blocks = " + score;
         ppsDisplay.innerHTML = "Blocks Per Second: " + pointsPerSec;
-        pickaxeCostDisplay.innerHTML = "+" + pickaxeUpgDPS + " block(s) per second - $" + pickaxeUpgCost;
+        pickaxeCostDisplay.innerHTML = "+" + pickaxeUpgDPS + " Block(s) per second - $" + pickaxeUpgCost;
         pickaxeAmountDisplay.innerHTML = pickaxeUpgAmount + " Pickaxes owned";
         if(devModeActive == 1){
         console.log("pps is now: " + pointsPerSec);
@@ -266,7 +266,7 @@ function upgrade3(){
         pointsPerSec = (pickaxeUpgAmount * pickaxeUpgDPS) + (tripwireDuperAmount * tripwireDuperDPS) + (axeAmount * axeDPS);
         scoreDisplay.innerHTML = "Blocks = " + score;
         ppsDisplay.innerHTML = "Blocks Per Second: " + pointsPerSec;
-        axeCostDisplay.innerHTML = "+ " + axeDPS + " blocks per second - $" + axeCost;
+        axeCostDisplay.innerHTML = "+ " + axeDPS + " Blocks per second - $" + axeCost;
         axeAmountDisplay.innerHTML = axeAmount + " Axes owned";
         if(devModeActive == 1){
             console.log("pps is now " + pointsPerSec);
@@ -297,7 +297,7 @@ function upgrade4(){
         pointsPerSec = (pickaxeUpgAmount * pickaxeUpgDPS) + (tripwireDuperAmount * tripwireDuperDPS) + (axeAmount * axeDPS);
         scoreDisplay.innerHTML = "Blocks = " + score;
         ppsDisplay.innerHTML = "Blocks Per Second: " + pointsPerSec;
-        tripwireDuperCostDisplay.innerHTML = "+" + tripwireDuperDPS + " blocks per second - $" + tripwireDuperCost;
+        tripwireDuperCostDisplay.innerHTML = "+" + tripwireDuperDPS + " Blocks per second - $" + tripwireDuperCost;
         tripwireDuperAmountDisplay.innerHTML = tripwireDuperAmount + " Tripwire Dupers owned";
         if(devModeActive == 1){
         console.log("pps is now: " + pointsPerSec);
@@ -328,7 +328,7 @@ function upgrade5(){
         pointsPerSec = (pickaxeUpgAmount * pickaxeUpgDPS) + (tripwireDuperAmount * tripwireDuperDPS) + (axeAmount * axeDPS) + (villagerAmount * villagerDPS);
         scoreDisplay.innerHTML = "Blocks = " + score;
         ppsDisplay.innerHTML = "Blocks Per Second: " + pointsPerSec;
-        villagerCostDisplay.innerHTML = "+" + villagerDPS + " blocks per second - " + villagerCost;
+        villagerCostDisplay.innerHTML = "+" + villagerDPS + " Blocks per second - " + villagerCost;
         villagerAmountDisplay.innerHTML = villagerAmount + " villagers owned";
         if(devModeActive == 1){
             console.log("pps is now" + pointsPerSec);
