@@ -12,16 +12,29 @@ let tripwireDuperAmount = 0;
 let tripwireDuperCost = 400;
 let villagerAmount = 0;
 let villagerCost = 5000;
+let ironFarmAmount = 0;
+let ironFarmCost = 50000;
+let goldFarmAmount = 0;
+let goldFarmCost = 100000;
+let wSkeleFarmAmount = 0;
+let wSkeleFarmCost = 250000;
+let beaconAmount = 0;
+let beaconCost = 1000000;
 let pickaxeUpgDPS = 1;
 let tripwireDuperDPS = 10;
 let axeDPS = 3;
-let villagerDPS = 50;
+let villagerDPS = 30;
+let ironFarmDPS = 500;
+let goldFarmDPS = 2500;
+let wSkeleFarmDPS = 10000;
+let beaconDPS = 50000;
 let pointsPerSec = 0;
 let pickAdv1Bought = 0;
 let pickAdv2Bought = 0;
 let furnaceAdv1Bought = 0;
 let pickAdv3Bought = 0;
 let pickAdv4Bought = 0;
+let pickAdv5Bought = 0;
 let freeAutoClickerAdv1Bought = 0;
 let freeAutoClickerAdv2Bought = 0;
 let freeAutoClickerAdv3Bought = 0;
@@ -62,6 +75,10 @@ let pickAdv4Div = document.getElementById('pickAdv4');
 let freeAutoClickerAdv1Div = document.getElementById('freeAutoClickerAdv1');
 let freeAutoClickerAdv2Div = document.getElementById('freeAutoClickerAdv2');
 let freeAutoClickerAdv3Div = document.getElementById('freeAutoClickerAdv3');
+let ironFarmDiv = document.getElementById('ironFarmDiv');
+let goldFarmDiv = document.getElementById('goldFarmDiv');
+let witherSkeleFarmDiv = document.getElementById('witherSkeletonFarmDiv');
+let beaconDiv = document.getElementById('beaconDiv');
 
 let freeAutoClickerToggledDisplay = document.getElementById('freeAutoClickerToggleDisplay');
 let freeAutoClickerIntervalDisplay = document.getElementById('freeAutoclickerIntervalDisplay');
@@ -112,7 +129,7 @@ function fastUpdater(){
     pointsPerSec = (pickaxeUpgAmount * pickaxeUpgDPS) + (tripwireDuperAmount * tripwireDuperDPS) + (axeAmount * axeDPS) + (villagerAmount * villagerDPS);
     scoreDisplay.innerHTML = "Blocks = " + score;
     ppsDisplay.innerHTML = "Blocks Per Second: " + pointsPerSec;
-    multiDisplay.innerHTML = "Blocks Per Click: " + (multi + furnaceUpgPPC);
+    multiDisplay.innerHTML = "Blocks Per Click: " + (multi + furnaceUpgAmount * furnaceUpgPPC);
     freeAutoClickerIntervalDisplay.innerHTML = "Current Autoclicker Interval: " + freeAutoClickerInterval;
     multi = (furnaceUpgAmount * furnaceUpgPPC);
     Math.floor(pointsPerSec);
@@ -137,6 +154,9 @@ function fastUpdater(){
     }
     if(totalAutoClickerClicks >= 2500 && freeAutoClickerAdv2Bought == 1){
         freeAutoClickerAdv3Visible();
+    }
+    if(villagerAmount >= 7){
+        ironFarmVisible();
     }
 }
 
@@ -164,18 +184,24 @@ function devMode(){
             freeUpgrades = 1;
         }else if(freeEverything == "Disable" || freeEverything == "disable"){
             freeUpgrades = 0;
+        }else{
+            console.log("Action Cancelled");
         }
         let infMoney = prompt("Do you want to enable or disable unlimited money?");
         if(infMoney == "Enable" || infMoney == "enable"){
             score = Infinity;
         }else if(infMoney == "Disable" || infMoney == "disable"){
             score = 0;
+        }else{
+            console.log("Action Cancelled")
         }
         let devAutoClicker = prompt("Do you want to enable or disable the dev autoclicker?");
         if(devAutoClicker == "Enable" || devAutoClicker == "enable"){
             setInterval(clickedButton, 50);
         }else if (devAutoClicker == "Disable" || devAutoClicker == "disable"){
             setInterval(clickedButton, 0);
+        }else{
+            console.log("Action cancelled");
         }
     }
 }
@@ -389,6 +415,15 @@ function freeAutoClickerAdv3Visible(){
     }
 }
 
+function ironFarmVisible(){
+    if(villagerAmount >= 7){
+        ironFarmDiv.style.display = "unset";
+    }
+}
+
+function goldFarmVisible(){
+}
+
 function pickAdv1(){
     if(score >= 300 && pickaxeUpgAmount >=3 && freeUpgrades != 1){
         pickaxeUpgDPS = 2;
@@ -477,6 +512,13 @@ function pickAdv4(){
         pickaxeCostDisplay.innerHTML = "+ " + pickaxeUpgDPS + " blocks per click - $" + pickaxeUpgCost;
         document.getElementById('clicker').src = "https://minecraft.wiki/images/Deepslate_Iron_Ore_JE2_BE1.png?f4fb9";
         pickAdv4Div.remove();
+    }
+}
+
+function pickAdv5(){
+    if(score >= 3000 && pickaxeUpgAmount >= 35 && pickAdv4Bought == 1 || freeUpgrades != 1){
+        pickaxeUpgDPS = 4;
+        pickAdv5Bought = 1;
     }
 }
 

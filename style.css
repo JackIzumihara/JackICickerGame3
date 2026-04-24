@@ -2,7 +2,12 @@
     display: flex;
     justify-content: center;
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    color: white;
     font-size: 40px;
+}
+
+body{
+    background-image: url("https://minecraft.wiki/images/thumb/Dirt_background_BE2.png/427px-Dirt_background_BE2.png?b0e3a");
 }
 
 .titleSmall{
@@ -11,6 +16,7 @@
     margin: auto;
     text-align: center;
     width: 300px;
+    color: white;
     font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
     font-size: 15px;
 }
@@ -19,6 +25,7 @@
     display: flex;
     margin-top: 5px;
     margin-bottom: 5px;
+    color: white;
     justify-content: center;
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
     font-size: 25px;
@@ -26,19 +33,22 @@
 
 .clickButton {
     display: flex;
+    color: white;
     align-items: center;
     flex-direction: column;
 }
 
 #clicker{
     display: flex;
+    color: white;
     width: 150px;
-    border: 5px solid black;
+    border: 5px solid rgb(255, 255, 255);
 }
 
 .freeAutoClicker{
     display: flex;
     justify-content: center;
+    color: white;
     align-items: center;
     flex-direction: column;
     text-align: center;
@@ -47,12 +57,14 @@
 .freeAutoClickerText{
     margin-top: 0px;
     font-size: 12px;
+    color: white;
     font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
 }
 
 #freeAutoClickerImg{
     display: flex;
     width: 60px;
+    color: white;
     align-items: center;
 }
 
@@ -66,6 +78,7 @@
 
 #clicker:hover{
     animation-name: smooth-size;
+    color: white;
     animation-duration: 0.5s;
     width: 160px;
 }
@@ -77,19 +90,21 @@
     align-items: center;
     text-align: center;
     left: 0px;
+    color: white;
     top: 0px;
     width: 400px;
     height: 500px;
     font-size: 12px;
     font-family:system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
     margin-top: 30px;
-    border: 10px solid black;
+    border: 10px solid rgb(255, 255, 255);
     border-radius: 5px;
 }
 
 .upgradeImg{
     display: block;
     margin-left: auto;
+    color: white;
     margin-right: auto;
     width:50px;
 }
@@ -97,12 +112,14 @@
 .devMode{
     position: fixed;
     right: 30px;
+    color: white;
     top: 0;
     font-size: 10px;
 }
 
 .upgradeTitle{
     display: flex;
+    color: white;
     justify-content: center;
 }
 
@@ -115,22 +132,25 @@
     top: 0;
     right: 0;
     width: 400px;
+    color: white;
     height: 500px;
     font-size: 12px;
     font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
     margin-top: 30px;
-    border: 10px solid black;
+    border: 10px solid rgb(255, 255, 255);
     border-radius: 5px;
 }
 
 .advancementTitle{
     font-size: 20px;
     display:flex;
+    color: white;
     justify-content: center;
 }
 
 .advancementImg{
     display: block;
+    color: white;
     margin-left: auto;
     margin-right: auto;
     width: 50px;
@@ -156,6 +176,18 @@
     display: none;
 }
 
+#pickAdv5{
+    display: none;
+}
+
+#pickAdv6{
+    display: none;
+}
+
+#pickAdv7{
+    display: none;
+}
+
 #freeAutoClickerAdv1{
     display: none;
 }
@@ -165,5 +197,21 @@
 }
 
 #freeAutoClickerAdv3{
+    display: none;
+}
+
+#ironFarmDiv{
+    display: none;
+}
+
+#goldFarmDiv{
+    display: none;
+}
+
+#witherSkeletonFarmDiv{
+    display: none;
+}
+
+#beaconDiv{
     display: none;
 }
