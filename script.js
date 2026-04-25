@@ -173,11 +173,11 @@ function devMode(){
     inputPasscode = "scrambled";
     alert("dev mode active, all upgrades are free and console displays are active");
     freeUpgrades = 1;
+    devModeActive = 1;
     }else{
         alert("Wrong passcode");
         inputPasscode = "L wrong password";
     }
-    devModeActive = 1;
     }else if(devModeActive == 1){
         let freeEverything = prompt("Do you want to enable or disable free upgrades and advancements?");
         if(freeEverything == "Enable" || freeEverything == "enable"){
@@ -197,11 +197,12 @@ function devMode(){
         }
         let devAutoClicker = prompt("Do you want to enable or disable the dev autoclicker?");
         if(devAutoClicker == "Enable" || devAutoClicker == "enable"){
-            setInterval(clickedButton, 50);
+            let devACID = setInterval(clickedButton, 50);
         }else if (devAutoClicker == "Disable" || devAutoClicker == "disable"){
-            setInterval(clickedButton, 0);
+            clearInterval(devACID);
         }else{
             console.log("Action cancelled");
+            clearInterval(devACID);
         }
     }
 }
