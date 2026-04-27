@@ -84,6 +84,7 @@ let pickAdv2Div = document.getElementById('pickAdv2');
 let furnaceAdv1Div = document.getElementById('furnaceAdv1');
 let pickAdv3Div = document.getElementById('pickAdv3');
 let pickAdv4Div = document.getElementById('pickAdv4');
+let pickAdv5Div = document.getElementById('pickAdv5');
 let freeAutoClickerAdv1Div = document.getElementById('freeAutoClickerAdv1');
 let freeAutoClickerAdv2Div = document.getElementById('freeAutoClickerAdv2');
 let freeAutoClickerAdv3Div = document.getElementById('freeAutoClickerAdv3');
@@ -138,7 +139,7 @@ function freeAutoClickerToggle(){
 }
 
 function fastUpdater(){
-    pointsPerSec = (pickaxeUpgAmount * pickaxeUpgDPS) + (tripwireDuperAmount * tripwireDuperDPS) + (axeAmount * axeDPS) + (villagerAmount * villagerDPS);
+    pointsPerSec = (pickaxeUpgAmount * pickaxeUpgDPS) + (tripwireDuperAmount * tripwireDuperDPS) + (axeAmount * axeDPS) + (villagerAmount * villagerDPS) + (ironFarmAmount * ironFarmDPS);
     scoreDisplay.innerHTML = "Blocks = " + score;
     ppsDisplay.innerHTML = "Blocks Per Second: " + pointsPerSec;
     multiDisplay.innerHTML = "Blocks Per Click: " + (multi + furnaceUpgAmount * furnaceUpgPPC);
@@ -157,6 +158,9 @@ function fastUpdater(){
     }
     if(pickAdv3Bought == 1 && pickaxeUpgAmount >= 25){
         pickAdv4Visible();
+    }
+    if(pickAdv4Bought == 1 && pickaxeUpgAmount >= 35 && villagerAmount >= 1){
+        pickAdv5Visible();
     }
     if(totalAutoClickerClicks >= 100){
         freeAutoClickerAdv1Visible();
@@ -387,20 +391,27 @@ function upgrade6(){
             score = score - ironFarmCost;
         }
         ironFarmAmount++;
-        if(ironFarmCost <= 200000){
+        if(ironFarmCost <= 200000 && ironFarmAmount <= 20){
             ironFarmCost = ironFarmCost * 1.5;
-        }else if(ironFarmCost > 200000 && ironFarmCost <= 1000000){
+        }else if(ironFarmCost > 200000 && ironFarmCost <= 1000000 && ironFarmAmount <= 20){
             ironFarmCost = ironFarmCost * 1.8;
-        }else if(ironFarmCost > 1000000){
+        }else if(ironFarmCost > 1000000 && ironFarmAmount <= 20){
             ironFarmCost = (ironFarmCost + 100) * 1.01;
 
+        }else{
+            ironFarmCost = Infinity;
         }
         ironFarmCost = Math.floor(ironFarmCost);
         pointsPerSec = (pickaxeUpgAmount * pickaxeUpgDPS) + (tripwireDuperAmount * tripwireDuperDPS) + (axeAmount * axeDPS) + (villagerAmount * villagerDPS) + (ironFarmAmount * ironFarmDPS);
         scoreDisplay.innerHTML = "Blocks = " + score;
         ppsDisplay.innerHTML = "Blocks per second: " + pointsPerSec;
         ironFarmAmountDisplay.innerHTML = ironFarmAmount + " Iron farm modules owned (Max 20)";
+        if(ironFarmAmount < 20){
         ironFarmCostDisplay.innerHTML = "+" + ironFarmDPS + " Blocks per second - $" + ironFarmCost;
+        
+        }else if(ironFarmAmount >= 20){
+            ironFarmCostDisplay.innerHTML = "Max Iron farms owned! Iron farm DPS: " + ironFarmDPS;
+        }
     }else{
         if(devModeActive == 1){
             console.log("not enough money, or max amount of iron farms!");
@@ -435,6 +446,12 @@ function pickAdv3Visible(){
 function pickAdv4Visible(){
     if(pickaxeUpgAmount >= 25 && pickAdv3Bought == 1){
         pickAdv4Div.style.display = "unset";
+    }
+}
+
+function pickAdv5Visible(){
+    if(pickaxeUpgAmount >= 30 && pickAdv4Bought == 1 && villagerAmount >= 1){
+        pickAdv5Div.style.display = "unset";
     }
 }
 
@@ -473,6 +490,7 @@ function pickAdv1(){
         pickaxeCostDisplay.innerHTML = "+" + pickaxeUpgDPS + " blocks per second - $" + pickaxeUpgCost;
         document.getElementById('pickUpgImg').src = "https://minecraft.wiki/images/Stone_Pickaxe_JE2_BE2.png?650b0";
         document.getElementById('clicker').src = "https://minecraft.wiki/images/thumb/Stone_JE5_BE3.png/150px-Stone_JE5_BE3.png?5780c";
+        document.body.style.backgroundImage = "url('https://minecraft.wiki/images/thumb/Winding_spaghetti_cave.png/1024px-Winding_spaghetti_cave.png?28a67')";
         pickAdv1Div.remove();
     }else if(freeUpgrades == 1){
         pickaxeUpgDPS = 2;
@@ -557,9 +575,19 @@ function pickAdv4(){
 }
 
 function pickAdv5(){
-    if(score >= 3000 && pickaxeUpgAmount >= 35 && pickAdv4Bought == 1 || freeUpgrades != 1){
-        pickaxeUpgDPS = 4;
+    if(score >= 3000 && pickaxeUpgAmount >= 35 && pickAdv4Bought == 1 || freeUpgrades == 1){
+        pickaxeUpgDPS = 6;
         pickAdv5Bought = 1;
+        if(freeUpgrades != 1){
+        score = score - 40000;
+        }
+        pickaxeCostDisplay.innerHTML = "+ " + pickaxeUpgDPS + " blocks per click - $" + pickaxeUpgCost;
+        document.getElementById('pickUpgImg').src = "https://minecraft.wiki/images/Diamond_Pickaxe_JE3_BE3.png?7409d";
+        document.getElementById('clicker').src = "https://minecraft.wiki/images/thumb/Deepslate_Diamond_Ore_JE2_BE1.png/150px-Deepslate_Diamond_Ore_JE2_BE1.png?ce0d8";
+        pickAdv5Div.remove();
+        if(devModeActive == 1){
+            console.log("pick dps is now " + pickaxeUpgDPS);
+        }
     }
 }
 
