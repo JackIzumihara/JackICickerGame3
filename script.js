@@ -67,6 +67,18 @@ let tripwireDuperAmountDisplay = document.getElementById('upgrade4Amount');
 let villagerCostDisplay = document.getElementById('upgrade5');
 let villagerAmountDisplay = document.getElementById('upgrade5Amount');
 
+let ironFarmCostDisplay = document.getElementById('upgrade6');
+let ironFarmAmountDisplay = document.getElementById('upgrade6Amount');
+
+let goldFarmCostDisplay = document.getElementById('upgrade7');
+let goldFarmAmountDisplay = document.getElementById('upgrade7Amount');
+
+let wSkeleFarmCostDisplay = document.getElementById('upgrade8');
+let wSkeleFarmAmountDisplay = document.getElementById('upgrade8Amount');
+
+let beaconCostDisplay = document.getElementById('upgrade9');
+let beaconAmountDisplay = document.getElementById('upgrade9Amount');
+
 let pickAdv1Div = document.getElementById('pickAdv1');
 let pickAdv2Div = document.getElementById('pickAdv2');
 let furnaceAdv1Div = document.getElementById('furnaceAdv1');
@@ -355,7 +367,7 @@ function upgrade5(){
         pointsPerSec = (pickaxeUpgAmount * pickaxeUpgDPS) + (tripwireDuperAmount * tripwireDuperDPS) + (axeAmount * axeDPS) + (villagerAmount * villagerDPS);
         scoreDisplay.innerHTML = "Blocks = " + score;
         ppsDisplay.innerHTML = "Blocks Per Second: " + pointsPerSec;
-        villagerCostDisplay.innerHTML = "+" + villagerDPS + " Blocks per second - " + villagerCost;
+        villagerCostDisplay.innerHTML = "+" + villagerDPS + " Blocks per second - $" + villagerCost;
         villagerAmountDisplay.innerHTML = villagerAmount + " villagers owned";
         if(devModeActive == 1){
             console.log("pps is now" + pointsPerSec);
@@ -364,6 +376,34 @@ function upgrade5(){
     }else{
         if(devModeActive == 1){
             console.log("not enough money for upgrade 5");
+        }
+    }
+}
+
+function upgrade6(){
+    if(score >= ironFarmCost || freeUpgrades == 1 && ironFarmAmount != 20){
+        pointsPerSec = pointsPerSec + ironFarmDPS;
+        if(freeUpgrades != 1){
+            score = score - ironFarmCost;
+        }
+        ironFarmAmount++;
+        if(ironFarmCost <= 200000){
+            ironFarmCost = ironFarmCost * 1.5;
+        }else if(ironFarmCost > 200000 && ironFarmCost <= 1000000){
+            ironFarmCost = ironFarmCost * 1.8;
+        }else if(ironFarmCost > 1000000){
+            ironFarmCost = (ironFarmCost + 100) * 1.01;
+
+        }
+        ironFarmCost = Math.floor(ironFarmCost);
+        pointsPerSec = (pickaxeUpgAmount * pickaxeUpgDPS) + (tripwireDuperAmount * tripwireDuperDPS) + (axeAmount * axeDPS) + (villagerAmount * villagerDPS) + (ironFarmAmount * ironFarmDPS);
+        scoreDisplay.innerHTML = "Blocks = " + score;
+        ppsDisplay.innerHTML = "Blocks per second: " + pointsPerSec;
+        ironFarmAmountDisplay.innerHTML = ironFarmAmount + " Iron farm modules owned (Max 20)";
+        ironFarmCostDisplay.innerHTML = "+" + ironFarmDPS + " Blocks per second - $" + ironFarmCost;
+    }else{
+        if(devModeActive == 1){
+            console.log("not enough money, or max amount of iron farms!");
         }
     }
 }
