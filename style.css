@@ -8,6 +8,7 @@
 
 body{
     background-image: url("https://minecraft.wiki/images/thumb/Dirt_background_BE2.png/427px-Dirt_background_BE2.png?b0e3a");
+    background-size: cover;
 }
 
 .titleSmall{

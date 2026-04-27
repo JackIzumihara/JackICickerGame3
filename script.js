@@ -498,6 +498,7 @@ function pickAdv1(){
         document.getElementById('pickUpgImg').src = "https://minecraft.wiki/images/Stone_Pickaxe_JE2_BE2.png?650b0";
         document.getElementById('clicker').src = "https://minecraft.wiki/images/thumb/Stone_JE5_BE3.png/150px-Stone_JE5_BE3.png?5780c";
         pickAdv1Bought = 1;
+        document.body.style.backgroundImage = "url('https://minecraft.wiki/images/thumb/Winding_spaghetti_cave.png/1024px-Winding_spaghetti_cave.png?28a67')";
         pickAdv1Div.remove();
     }
 }
